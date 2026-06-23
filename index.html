@@ -55,17 +55,24 @@
 
   <!-- HERO -->
   <section class="hero" id="top">
+    <!-- Hintergrund-Video im Dauer-Loop.
+         Lege dein eigenes Video als "hero.mp4" (optional "hero.webm") ins Projekt.
+         Solange kein Video da ist, wird das Poster-Bild mit sanftem Zoom gezeigt. -->
+    <div class="hero-media" aria-hidden="true">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto"
+             poster="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1600&q=80">
+        <source src="hero.webm" type="video/webm" />
+        <source src="hero.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-overlay"></div>
+    </div>
+
     <div class="hero-inner">
-      <p class="eyebrow" data-reveal>— Friseursalon · Haren (Ems) —</p>
       <h1 class="hero-title" data-reveal>
-        <span class="line"><span class="w">Dein</span> <span class="w">Style,</span></span>
-        <span class="line grad"><span class="w">unsere</span> <span class="w">Leidenschaft.</span></span>
+        <span class="line"><span class="w">CITY</span></span>
+        <span class="line grad"><span class="w">CUT</span></span>
       </h1>
-      <p class="hero-sub" data-reveal data-reveal-delay="200">Willkommen bei City Cut am Neuen Markt in Haren. Präziser Schnitt, frische Farbe und ein Styling, das zu dir passt – mit Termin oder spontan vorbeischauen.</p>
-      <div class="hero-cta" data-reveal data-reveal-delay="320">
-        <a href="#kontakt" class="btn btn-primary magnetic">Termin vereinbaren</a>
-        <a href="#leistungen" class="btn btn-ghost magnetic">Leistungen ansehen</a>
-      </div>
+      <p class="hero-motto" data-reveal data-reveal-delay="220">Dein Style, unsere Leidenschaft.</p>
     </div>
 
     <a href="#cut" class="scroll-cue" aria-label="Nach unten scrollen">

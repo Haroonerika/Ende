@@ -29,6 +29,15 @@ Premium-Look – dunkles Design mit Gold-Akzenten, edle Serifen-Schrift,
 Reines HTML/CSS/JS, keine Abhängigkeiten. Bewegung wird bei
 `prefers-reduced-motion` automatisch reduziert.
 
+## Header-Video einsetzen
+Der Startbereich zeigt ein Hintergrund-Video im Dauer-Loop.
+Lege dafür einfach deine Videodatei **`hero.mp4`** (optional zusätzlich
+`hero.webm`) in den Projektordner – fertig.
+
+- Empfehlung: kurzer Clip (8–20 Sek.), quer, ohne Ton, möglichst komprimiert.
+- Solange kein Video vorhanden ist, wird automatisch ein Poster-Bild mit
+  sanftem Zoom angezeigt (in `index.html` beim `<video poster="…">` änderbar).
+
 ## Eigene Inhalte einpflegen
 Die meisten Inhalte lassen sich leicht anpassen:
 
