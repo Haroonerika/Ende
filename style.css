@@ -159,9 +159,11 @@ img { max-width: 100%; display: block; }
 @keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.12); } }
 .hero-overlay {
   position: absolute; inset: 0;
-  background:
-    radial-gradient(120% 80% at 50% 30%, transparent 30%, rgba(13,12,10,0.55) 100%),
-    linear-gradient(180deg, rgba(13,12,10,0.55) 0%, rgba(13,12,10,0.25) 40%, rgba(13,12,10,0.92) 100%);
+  /* dunkler Filter, damit Logo + Motto klar lesbar sind */
+  background-color: rgba(13, 12, 10, 0.45);
+  background-image:
+    radial-gradient(120% 80% at 50% 35%, rgba(13,12,10,0.25) 20%, rgba(13,12,10,0.72) 100%),
+    linear-gradient(180deg, rgba(13,12,10,0.7) 0%, rgba(13,12,10,0.45) 40%, rgba(13,12,10,0.96) 100%);
 }
 
 .hero-inner { position: relative; z-index: 1; }
