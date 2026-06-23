@@ -245,6 +245,7 @@ img { max-width: 100%; display: block; }
 .team-card:hover .team-photo { filter: grayscale(0); transform: translateY(-5px); }
 .team-card h3 { font-size: 1.35rem; color: var(--text); }
 .team-card .role { color: var(--gold); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 3px; }
+.team-card .spec { color: var(--muted); font-size: 0.85rem; margin-top: 6px; line-height: 1.4; }
 
 /* ---------- Bewertungen ---------- */
 .rating-badge { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 12px; }

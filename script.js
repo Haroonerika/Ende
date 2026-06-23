@@ -29,11 +29,15 @@
   ];
 
   // Team. Ersetze Namen, Rollen und Fotos durch euer echtes Team.
+  // "img" am besten durch eigene Fotos ersetzen (z. B. "bilder/juan.jpg").
   const TEAM = [
-    { name: "Inhaber", role: "Master Barber", img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" },
-    { name: "Stylistin", role: "Color-Spezialistin", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80" },
-    { name: "Stylist", role: "Cut & Style", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" },
-    { name: "Stylistin", role: "Damen & Hochsteck", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" },
+    { name: "Juan G.", role: "Inhaber", spec: "Schnitt & Farbe · Damen & Herren", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" },
+    { name: "Carolin", role: "Color-Expertin", spec: "Coloration & Schnitt · Damen & Herren", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" },
+    { name: "Noar S.", role: "Kosmetikerin", spec: "Fußpflege · Make-up · Gesichtsreinigung", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80" },
+    { name: "Aron M.", role: "Barber", spec: "Bart, Classic Cuts & Fade", img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" },
+    { name: "Yahya M.", role: "Barber", spec: "Trend-Looks & Fade", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" },
+    { name: "Mohamed", role: "Barber", spec: "Bart-Experte & Fade", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80" },
+    { name: "Dilovan", role: "Barber", spec: "Neueste Trends & Fade", img: "https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&w=600&q=80" },
   ];
 
   // Bewertungen. Trage hier gerne echte Google-Rezensionen ein.
@@ -76,6 +80,7 @@
       const h = el("h3"); h.textContent = m.name;
       const role = el("p", "role"); role.textContent = m.role;
       card.append(img, h, role);
+      if (m.spec) { const spec = el("p", "spec"); spec.textContent = m.spec; card.append(spec); }
       wrap.appendChild(card);
     });
   }
