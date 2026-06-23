@@ -1,193 +1,262 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="dark">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AutoFlow – der moderne Gebrauchtwagen-Marktplatz. Finde dein nächstes Auto schneller, schöner, flüssiger." />
-  <title>AutoFlow · Gebrauchtwagen Marktplatz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d0c0a" />
+  <meta name="description" content="City Cut – dein moderner Friseursalon in Haren (Ems). Dein Style, unsere Leidenschaft. Schnitt, Coloration, Styling – mit und ohne Termin." />
+  <title>City Cut · Friseursalon Haren (Ems)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Animated background blobs -->
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Decorative background -->
   <div class="bg-decor" aria-hidden="true">
-    <span class="blob blob-1"></span>
-    <span class="blob blob-2"></span>
-    <span class="blob blob-3"></span>
+    <span class="glow glow-1" data-parallax="0.18"></span>
+    <span class="glow glow-2" data-parallax="0.3"></span>
+    <span class="grain"></span>
+  </div>
+
+  <!-- Floating action icons (parallax) -->
+  <div class="floaties" aria-hidden="true">
+    <svg class="floatie f1" data-parallax="0.5" viewBox="0 0 24 24" width="40" height="40" fill="none"><circle cx="6" cy="6" r="3" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 7.5L20 16M8.5 16.5L20 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <svg class="floatie f2" data-parallax="0.8" viewBox="0 0 24 24" width="34" height="34" fill="none"><path d="M4 4h16M7 4v16M11 4v10M15 4v16M19 4v10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
   </div>
 
   <!-- NAVBAR -->
   <header class="nav" id="nav">
-    <a href="#" class="brand" aria-label="AutoFlow Startseite">
+    <a href="#top" class="brand" aria-label="City Cut Startseite">
       <span class="brand-mark">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M3 13l2-5a3 3 0 012.8-2h8.4A3 3 0 0119 8l2 5v5a1 1 0 01-1 1h-2a1 1 0 01-1-1v-1H7v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7.5" cy="14.5" r="1.2" fill="currentColor"/><circle cx="16.5" cy="14.5" r="1.2" fill="currentColor"/></svg>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><circle cx="6" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 7.5L20 16M8.5 16.5L20 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       </span>
-      <span class="brand-name">Auto<span>Flow</span></span>
+      <span class="brand-name">CITY<span>CUT</span></span>
     </a>
 
-    <nav class="nav-links" aria-label="Hauptnavigation">
-      <a href="#angebote">Angebote</a>
-      <a href="#so-funktionierts">So funktioniert's</a>
-      <a href="#" id="favBtn" class="nav-fav">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M12 21s-7.5-4.6-10-9.2C.6 9 2 5.5 5.2 5.1 7 4.9 8.7 5.9 12 9c3.3-3.1 5-4.1 6.8-3.9C22 5.5 23.4 9 22 11.8 19.5 16.4 12 21 12 21z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-        Favoriten <span class="fav-count" id="favCount">0</span>
-      </a>
+    <nav class="nav-links" id="navLinks" aria-label="Hauptnavigation">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#team">Team</a>
+      <a href="#bewertungen">Bewertungen</a>
+      <a href="#kontakt">Öffnungszeiten</a>
     </nav>
 
     <div class="nav-actions">
-      <button class="theme-toggle" id="themeToggle" aria-label="Design umschalten" title="Hell / Dunkel">
-        <svg class="ic-sun" viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-        <svg class="ic-moon" viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M21 12.8A8.5 8.5 0 1111.2 3a6.6 6.6 0 009.8 9.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+      <a href="tel:+4900000000" class="btn btn-primary btn-book magnetic">Termin anfragen</a>
+      <button class="nav-burger" id="navBurger" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
-      <button class="btn btn-primary btn-sell">Auto verkaufen</button>
     </div>
   </header>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="top">
     <div class="hero-inner">
-      <p class="eyebrow reveal">★ Über 50.000 geprüfte Gebrauchtwagen</p>
-      <h1 class="reveal">Dein nächstes Auto.<br /><span class="grad">Schneller gefunden.</span></h1>
-      <p class="hero-sub reveal">Der modernste Gebrauchtwagen-Marktplatz Deutschlands – flüssig, transparent und ohne nervige Werbung. Filtere live und finde in Sekunden den passenden Wagen.</p>
+      <p class="eyebrow" data-reveal>— Friseursalon · Haren (Ems) —</p>
+      <h1 class="hero-title" data-reveal>
+        <span class="line"><span class="w">Dein</span> <span class="w">Style,</span></span>
+        <span class="line grad"><span class="w">unsere</span> <span class="w">Leidenschaft.</span></span>
+      </h1>
+      <p class="hero-sub" data-reveal data-reveal-delay="200">Willkommen bei City Cut am Neuen Markt in Haren. Präziser Schnitt, frische Farbe und ein Styling, das zu dir passt – mit Termin oder spontan vorbeischauen.</p>
+      <div class="hero-cta" data-reveal data-reveal-delay="320">
+        <a href="#kontakt" class="btn btn-primary magnetic">Termin vereinbaren</a>
+        <a href="#leistungen" class="btn btn-ghost magnetic">Leistungen ansehen</a>
+      </div>
+    </div>
 
-      <form class="search-bar reveal" id="searchBar" onsubmit="return false">
-        <div class="search-field">
-          <label>Marke</label>
-          <select id="qBrand">
-            <option value="">Alle Marken</option>
-          </select>
-        </div>
-        <div class="search-field">
-          <label>Max. Preis</label>
-          <select id="qPrice">
-            <option value="">Egal</option>
-            <option value="10000">bis 10.000 €</option>
-            <option value="20000">bis 20.000 €</option>
-            <option value="35000">bis 35.000 €</option>
-            <option value="60000">bis 60.000 €</option>
-            <option value="100000">bis 100.000 €</option>
-          </select>
-        </div>
-        <div class="search-field grow">
-          <label>Suchbegriff</label>
-          <input type="text" id="qText" placeholder="z. B. Golf, Kombi, Hybrid…" autocomplete="off" />
-        </div>
-        <button class="btn btn-primary search-go" id="searchGo">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          Suchen
-        </button>
-      </form>
+    <a href="#cut" class="scroll-cue" aria-label="Nach unten scrollen">
+      <span></span>
+    </a>
+  </section>
 
-      <div class="hero-stats reveal">
-        <div><strong id="statCars">0</strong><span>Fahrzeuge</span></div>
-        <div><strong>4.9★</strong><span>Bewertung</span></div>
-        <div><strong>100%</strong><span>Geprüft</span></div>
+  <!-- SIGNATURE SCISSOR CUT ANIMATION -->
+  <section class="cut-band" id="cut" aria-hidden="true">
+    <div class="cut-band-inner">
+      <p class="cut-tagline" data-reveal>Schnitt für Schnitt<br /><b>zur Perfektion.</b></p>
+
+      <div class="cut-track" id="cutTrack">
+        <!-- the hair line that gets cut -->
+        <div class="hairline">
+          <span class="hair-uncut"></span>
+          <span class="hair-cut" id="hairCut"></span>
+        </div>
+        <!-- the scissors that travel across -->
+        <div class="scissors" id="scissors">
+          <svg viewBox="0 0 64 40" width="64" height="40" fill="none">
+            <circle cx="10" cy="10" r="6.5" stroke="currentColor" stroke-width="2.4"/>
+            <circle cx="10" cy="30" r="6.5" stroke="currentColor" stroke-width="2.4"/>
+            <path class="blade blade-top" d="M15 13L60 19" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <path class="blade blade-bottom" d="M15 27L60 21" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <circle cx="33" cy="20" r="1.6" fill="currentColor"/>
+          </svg>
+        </div>
+        <!-- falling hair snippets -->
+        <div class="snips" id="snips"></div>
+      </div>
+
+      <!-- running marquee of services -->
+      <div class="marquee" id="marquee">
+        <div class="marquee-track">
+          <span>Schnitt</span><i>✦</i><span>Coloration</span><i>✦</i><span>Balayage</span><i>✦</i><span>Barber</span><i>✦</i><span>Bart</span><i>✦</i><span>Styling</span><i>✦</i><span>Hochsteck</span><i>✦</i><span>Pflege</span><i>✦</i>
+          <span>Schnitt</span><i>✦</i><span>Coloration</span><i>✦</i><span>Balayage</span><i>✦</i><span>Barber</span><i>✦</i><span>Bart</span><i>✦</i><span>Styling</span><i>✦</i><span>Hochsteck</span><i>✦</i><span>Pflege</span><i>✦</i>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- RESULTS -->
-  <main class="layout" id="angebote">
-    <!-- FILTER SIDEBAR -->
-    <aside class="filters" id="filters">
-      <div class="filters-head">
-        <h2>Filter</h2>
-        <button class="link-btn" id="resetFilters">Zurücksetzen</button>
+  <!-- STATS -->
+  <section class="stats-band">
+    <div class="stats-grid">
+      <div class="stat" data-reveal><strong data-count="4.9" data-decimals="1">0</strong><span>Google-Bewertung ★</span></div>
+      <div class="stat" data-reveal data-reveal-delay="120"><strong data-count="180" data-suffix="+">0</strong><span>zufriedene Kund:innen</span></div>
+      <div class="stat" data-reveal data-reveal-delay="240"><strong data-count="100" data-suffix="%">0</strong><span>Leidenschaft</span></div>
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN & PREISE -->
+  <section class="section" id="leistungen">
+    <div class="section-head" data-reveal>
+      <p class="kicker">Leistungen &amp; Preise</p>
+      <h2>Was wir für dich tun</h2>
+      <p class="section-sub">Alle Preise sind Richtwerte ab. Den finalen Preis besprechen wir gerne vorab. Aktuelle Preise erfährst du auch direkt im Salon.</p>
+    </div>
+
+    <div class="price-grid">
+      <article class="price-card tilt" data-reveal>
+        <h3>Damen</h3>
+        <ul class="price-list">
+          <li><span>Waschen, Schnitt &amp; Föhnen</span><span class="price">ab 39 €</span></li>
+          <li><span>Trockenschnitt</span><span class="price">ab 29 €</span></li>
+          <li><span>Coloration</span><span class="price">ab 45 €</span></li>
+          <li><span>Strähnen / Balayage</span><span class="price">ab 79 €</span></li>
+          <li><span>Hochsteckfrisur / Event</span><span class="price">ab 59 €</span></li>
+        </ul>
+      </article>
+
+      <article class="price-card tilt" data-reveal data-reveal-delay="120">
+        <h3>Herren &amp; Barber</h3>
+        <ul class="price-list">
+          <li><span>Waschen, Schnitt &amp; Styling</span><span class="price">ab 22 €</span></li>
+          <li><span>Maschinenschnitt</span><span class="price">ab 16 €</span></li>
+          <li><span>Bart trimmen &amp; formen</span><span class="price">ab 12 €</span></li>
+          <li><span>Schnitt &amp; Bart Kombi</span><span class="price">ab 30 €</span></li>
+          <li><span>Konturen / Lining</span><span class="price">ab 10 €</span></li>
+        </ul>
+      </article>
+
+      <article class="price-card tilt" data-reveal data-reveal-delay="240">
+        <h3>Pflege &amp; Extras</h3>
+        <ul class="price-list">
+          <li><span>Intensiv-Haarkur</span><span class="price">ab 15 €</span></li>
+          <li><span>Olaplex-Behandlung</span><span class="price">ab 25 €</span></li>
+          <li><span>Kinderschnitt (bis 10 J.)</span><span class="price">ab 15 €</span></li>
+          <li><span>Augenbrauen zupfen</span><span class="price">ab 8 €</span></li>
+          <li><span>Beratung</span><span class="price">kostenlos</span></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="section" id="galerie">
+    <div class="section-head" data-reveal>
+      <p class="kicker">Galerie</p>
+      <h2>Einblicke &amp; Looks</h2>
+      <p class="section-sub">Ein kleiner Eindruck unserer Arbeit. Mehr aktuelle Looks findest du auf unserem Instagram <a href="https://www.instagram.com/citycut_haren/" target="_blank" rel="noopener">@citycut_haren</a>.</p>
+    </div>
+
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section" id="team">
+    <div class="section-head" data-reveal>
+      <p class="kicker">Unser Team</p>
+      <h2>Die Hände hinter dem Stil</h2>
+      <p class="section-sub">Ein freundliches, eingespieltes Team – mit Liebe zum Detail und einem Gespür für deinen Look.</p>
+    </div>
+
+    <div class="team-grid" id="teamGrid"></div>
+  </section>
+
+  <!-- BEWERTUNGEN -->
+  <section class="section" id="bewertungen">
+    <div class="section-head" data-reveal>
+      <p class="kicker">Google-Bewertungen</p>
+      <h2>Das sagen unsere Kund:innen</h2>
+      <div class="rating-badge" data-reveal data-reveal-delay="120">
+        <span class="rating-num">4,9</span>
+        <span class="rating-stars" aria-label="4,9 von 5 Sternen">★★★★★</span>
+        <span class="rating-meta">basierend auf Google-Rezensionen</span>
       </div>
+    </div>
 
-      <div class="filter-group">
-        <h3>Kraftstoff</h3>
-        <div class="chips" id="fuelChips"></div>
-      </div>
+    <div class="reviews" id="reviews"></div>
 
-      <div class="filter-group">
-        <h3>Getriebe</h3>
-        <div class="chips" id="gearChips"></div>
-      </div>
+    <div class="reviews-cta" data-reveal>
+      <a href="https://www.google.com/maps/search/City+Cut+Haren+Ems" target="_blank" rel="noopener" class="btn btn-ghost magnetic">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M12 21s-6-5.2-6-9.7A6 6 0 0118 11.3C18 15.8 12 21 12 21z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.2" stroke="currentColor" stroke-width="1.6"/></svg>
+        Alle Bewertungen auf Google
+      </a>
+    </div>
+  </section>
 
-      <div class="filter-group">
-        <h3>Karosserie</h3>
-        <div class="chips" id="bodyChips"></div>
-      </div>
+  <!-- KONTAKT / ÖFFNUNGSZEITEN -->
+  <section class="section contact" id="kontakt">
+    <div class="contact-grid">
+      <div class="contact-info" data-reveal>
+        <p class="kicker">Besuch uns</p>
+        <h2>Öffnungszeiten &amp; Adresse</h2>
 
-      <div class="filter-group">
-        <h3>Max. Kilometerstand</h3>
-        <input type="range" id="kmRange" min="0" max="250000" step="5000" value="250000" />
-        <div class="range-val"><span id="kmVal">250.000 km</span></div>
-      </div>
+        <ul class="hours">
+          <li><span>Montag</span><span>Geschlossen</span></li>
+          <li><span>Dienstag – Freitag</span><span>09:00 – 18:00</span></li>
+          <li><span>Samstag</span><span>09:00 – 14:00</span></li>
+          <li><span>Sonntag</span><span>Geschlossen</span></li>
+        </ul>
 
-      <div class="filter-group">
-        <h3>Min. Baujahr</h3>
-        <input type="range" id="yearRange" min="2005" max="2024" step="1" value="2005" />
-        <div class="range-val"><span id="yearVal">ab 2005</span></div>
-      </div>
-
-      <label class="switch-row">
-        <input type="checkbox" id="onlyFav" />
-        <span class="switch"></span>
-        Nur Favoriten anzeigen
-      </label>
-    </aside>
-
-    <!-- LISTINGS -->
-    <section class="results">
-      <div class="results-bar">
-        <p class="results-count"><strong id="resultCount">0</strong> Fahrzeuge gefunden</p>
-        <div class="sort">
-          <label for="sortBy">Sortieren:</label>
-          <select id="sortBy">
-            <option value="rel">Empfohlen</option>
-            <option value="price-asc">Preis aufsteigend</option>
-            <option value="price-desc">Preis absteigend</option>
-            <option value="km-asc">Kilometer aufsteigend</option>
-            <option value="year-desc">Neueste zuerst</option>
-          </select>
+        <div class="contact-details">
+          <p><strong>Adresse</strong><br />Neuer Markt 8, 49733 Haren (Ems)</p>
+          <p><strong>Telefon</strong><br /><a href="tel:+4900000000">+49 000 0000000</a></p>
+          <p><strong>Instagram</strong><br /><a href="https://www.instagram.com/citycut_haren/" target="_blank" rel="noopener">@citycut_haren</a></p>
         </div>
+
+        <a href="tel:+4900000000" class="btn btn-primary magnetic">Jetzt Termin anfragen</a>
       </div>
 
-      <button class="filters-mobile-toggle" id="filtersMobileToggle">⚙︎ Filter anzeigen</button>
-
-      <div class="grid" id="carGrid"></div>
-
-      <div class="empty" id="emptyState" hidden>
-        <div class="empty-art">🔍</div>
-        <h3>Keine Treffer</h3>
-        <p>Passe deine Filter an, um mehr Fahrzeuge zu sehen.</p>
-        <button class="btn btn-ghost" id="emptyReset">Filter zurücksetzen</button>
+      <div class="contact-map" data-reveal data-reveal-delay="160">
+        <iframe
+          title="Standort City Cut, Neuer Markt 8, Haren (Ems)"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=7.235%2C52.785%2C7.255%2C52.795&layer=mapnik&marker=52.790%2C7.245"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
-    </section>
-  </main>
-
-  <!-- HOW IT WORKS -->
-  <section class="how" id="so-funktionierts">
-    <h2 class="section-title reveal">In 3 Schritten zum Traumauto</h2>
-    <div class="how-grid">
-      <article class="how-card reveal"><span class="how-num">1</span><h3>Filtern</h3><p>Stelle deine Wünsche ein – Ergebnisse aktualisieren sich live, ganz ohne Neuladen.</p></article>
-      <article class="how-card reveal"><span class="how-num">2</span><h3>Vergleichen</h3><p>Speichere Favoriten und vergleiche Preise, Ausstattung und Kilometerstand in Ruhe.</p></article>
-      <article class="how-card reveal"><span class="how-num">3</span><h3>Kontaktieren</h3><p>Schreibe den Händler direkt an und vereinbare deine Probefahrt – schnell & unkompliziert.</p></article>
     </div>
   </section>
 
   <footer class="footer">
     <div class="footer-brand">
-      <span class="brand-name">Auto<span>Flow</span></span>
-      <p>Der moderne Weg, einen Gebrauchtwagen zu finden.</p>
+      <span class="brand-name">CITY<span>CUT</span></span>
+      <p>Dein Style, unsere Leidenschaft. · Haren (Ems)</p>
     </div>
-    <p class="footer-copy">© <span id="year"></span> AutoFlow · Demo-Projekt. Alle Fahrzeugdaten sind Beispiele.</p>
+    <p class="footer-copy">© <span id="year"></span> City Cut Haren · Alle Rechte vorbehalten.</p>
   </footer>
 
-  <!-- DETAIL MODAL -->
-  <div class="modal" id="modal" hidden>
-    <div class="modal-backdrop" data-close></div>
-    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" data-close aria-label="Schließen">✕</button>
-      <div class="modal-body" id="modalBody"></div>
-    </div>
-  </div>
+  <!-- MOBILE STICKY CTA -->
+  <a href="tel:+4900000000" class="mobile-cta" id="mobileCta">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M6.6 10.8a14 14 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11 11 0 003.4.55 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.2.2 2.3.55 3.4a1 1 0 01-.25 1l-2.2 2.4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    Termin anfragen
+  </a>
 
-  <div class="toast" id="toast" hidden></div>
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Schließen">✕</button>
+    <div class="lightbox-stage" id="lightboxStage"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>
