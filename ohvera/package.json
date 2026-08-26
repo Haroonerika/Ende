@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc -b --noEmit false --emitDeclarationOnly false --pretty"
+    "typecheck": "tsc -b --noEmit false --emitDeclarationOnly false --pretty",
+    "vorschau": "VITE_VORSCHAU=1 vite build --base ./ && node bauen-vorschau.mjs vorschau.html"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.1.0",

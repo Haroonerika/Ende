@@ -79,6 +79,20 @@ React 18, TypeScript, Vite, Tailwind CSS, React Router.
 Schriften: Archivo (Expanded, für Überschriften), IBM Plex Sans (Fließtext),
 IBM Plex Mono (Zahlen, Sekunden, Preise) — alle lokal gebündelt.
 
+## Zwischenstand ohne Server ansehen
+
+```bash
+npm run vorschau
+```
+
+Erzeugt `vorschau.html` — eine einzige Datei mit eingebautem CSS, JavaScript
+und eingebetteten Schriften. Die lässt sich per Doppelklick im Browser
+öffnen, verschicken oder auf dem Handy ansehen, ohne dass ein Server läuft.
+
+Diese Variante nutzt Adressen mit Raute (`…/#/werben`), weil ohne Server
+keine echten Pfade funktionieren. Am Livebetrieb ändert das nichts — dort
+bleiben die sauberen URLs.
+
 ## Veröffentlichen
 
 `npm run build` erzeugt `dist/`. Das ist eine Single-Page-App: Der Hoster
