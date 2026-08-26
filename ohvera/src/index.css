@@ -1,0 +1,282 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   OHVERA Designsystem
+   Farben, Typografie und wiederkehrende Bausteine.
+   Inhalte stehen NICHT hier, sondern in src/content/site.ts
+------------------------------------------------------------------- */
+
+:root {
+  --anthrazit: #14161a;
+  --tiefblau: #1b2230;
+  --offwhite: #f5f6f7;
+  --weiss: #ffffff;
+  --grau: #8a9099;
+  --grau-stark: #5a6069;
+  --elektroblau: #1b57ff;
+  --radius: 12px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Ankersprünge dürfen nicht unter der Sticky-Navigation landen */
+  section[id],
+  div[id],
+  h2[id] {
+    scroll-margin-top: 88px;
+  }
+
+  body {
+    @apply bg-offwhite font-sans text-anthrazit antialiased;
+    font-feature-settings: 'kern' 1;
+  }
+
+  /* Sichtbarer Fokusring in Elektroblau – auf hellem wie dunklem Grund */
+  :focus-visible {
+    outline: 3px solid var(--elektroblau);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--elektroblau);
+    color: #fff;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  /* Zahlen immer tabellarisch – sonst springen Zähler und Preise */
+  .font-mono,
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /* --- Typografie ------------------------------------------------ */
+
+  /* Archivo Expanded: breite Buchstabenformen wie klassische Außenwerbung */
+  .font-display {
+    font-family: 'Archivo Variable', Archivo, 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: 125%;
+    font-variation-settings: 'wdth' 125;
+    letter-spacing: -0.015em;
+    line-height: 1.02;
+  }
+
+  .h1 {
+    @apply font-display text-[2.35rem] font-extrabold xs:text-[2.75rem] sm:text-[3.5rem] lg:text-[4.25rem];
+  }
+
+  .h2 {
+    @apply font-display text-[1.85rem] font-bold xs:text-[2.1rem] sm:text-[2.6rem] lg:text-[3rem];
+  }
+
+  .h3 {
+    @apply font-sans text-lg font-semibold sm:text-xl;
+  }
+
+  /* Fließtext: maximal 68 Zeichen Zeilenlänge */
+  .fliess {
+    @apply text-[1.0625rem] leading-[1.65] sm:text-[1.125rem];
+    max-width: 68ch;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[0.7rem] uppercase tracking-[0.18em] sm:text-xs;
+  }
+
+  /* --- Flächen --------------------------------------------------- */
+
+  .sektion {
+    @apply px-5 py-16 sm:px-8 sm:py-24 lg:py-28;
+  }
+
+  .huelle {
+    @apply mx-auto w-full max-w-[1200px];
+  }
+
+  .sektion-dunkel {
+    @apply bg-anthrazit text-offwhite;
+  }
+
+  .sektion-hell {
+    @apply bg-offwhite text-anthrazit;
+  }
+
+  .karte {
+    @apply rounded-lg bg-weiss shadow-weich;
+    border: 1px solid rgba(138, 144, 153, 0.15);
+  }
+
+  .karte-dunkel {
+    @apply rounded-lg bg-tiefblau shadow-dunkel;
+    border: 1px solid rgba(138, 144, 153, 0.15);
+  }
+
+  .trennlinie {
+    border-color: rgba(138, 144, 153, 0.15);
+  }
+
+  /* --- Buttons --------------------------------------------------- */
+
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded px-6 py-3 text-center text-[0.975rem] font-semibold transition-colors duration-150;
+  }
+
+  .btn-primaer {
+    @apply btn bg-elektroblau text-weiss hover:bg-elektroblau-tief;
+  }
+
+  .btn-sekundaer-dunkel {
+    @apply btn text-offwhite hover:bg-white/10;
+    border: 1px solid rgba(245, 246, 247, 0.35);
+  }
+
+  .btn-sekundaer-hell {
+    @apply btn text-anthrazit hover:bg-anthrazit/5;
+    border: 1px solid rgba(20, 22, 26, 0.25);
+  }
+
+  .btn-inaktiv {
+    @apply btn cursor-not-allowed text-grau;
+    border: 1px solid rgba(138, 144, 153, 0.3);
+  }
+
+  /* --- Badges ---------------------------------------------------- */
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.12em];
+  }
+
+  .badge-blau {
+    @apply badge bg-elektroblau text-weiss;
+  }
+
+  .badge-grau {
+    @apply badge text-grau-stark;
+    border: 1px solid rgba(138, 144, 153, 0.4);
+  }
+
+  .badge-grau-dunkel {
+    @apply badge text-grau;
+    border: 1px solid rgba(138, 144, 153, 0.4);
+  }
+
+  /* --- Formulare ------------------------------------------------- */
+
+  .feld {
+    @apply block w-full rounded border bg-weiss px-4 py-3 text-base text-anthrazit placeholder:text-grau;
+    border-color: rgba(138, 144, 153, 0.45);
+    min-height: 48px;
+  }
+
+  .feld:focus {
+    border-color: var(--elektroblau);
+  }
+
+  .feld-fehler {
+    border-color: #b3261e;
+    border-width: 2px;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-anthrazit;
+  }
+
+  .hilfstext {
+    @apply mt-1.5 text-sm text-grau-stark;
+  }
+
+  .fehlertext {
+    @apply mt-1.5 flex items-start gap-1.5 text-sm font-medium;
+    color: #b3261e;
+  }
+
+  /* Auswahlkacheln in den Formularen */
+  .auswahl {
+    @apply flex w-full cursor-pointer items-center gap-3 rounded border bg-weiss px-4 py-4 text-left text-[0.975rem] transition-colors;
+    border-color: rgba(138, 144, 153, 0.45);
+    min-height: 56px;
+  }
+
+  .auswahl:hover {
+    border-color: rgba(27, 87, 255, 0.5);
+  }
+
+  .auswahl-aktiv {
+    border-color: var(--elektroblau);
+    border-width: 2px;
+    background: rgba(27, 87, 255, 0.05);
+  }
+}
+
+@layer utilities {
+  /* Dezentes Scroll-Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    will-change: opacity, transform;
+  }
+
+  .reveal.sichtbar {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Horizontale Motivgalerie auf Mobilgeräten */
+  .rail {
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .rail > * {
+    scroll-snap-align: start;
+  }
+
+  .rail::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .rail::-webkit-scrollbar-thumb {
+    background: rgba(138, 144, 153, 0.45);
+    border-radius: 999px;
+  }
+
+  .hochformat {
+    aspect-ratio: 9 / 16;
+  }
+}
+
+/* Bewegung nur, wenn der Nutzer sie nicht abbestellt hat */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
