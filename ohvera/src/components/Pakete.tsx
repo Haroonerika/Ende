@@ -15,7 +15,7 @@ export default function Pakete() {
           return (
             <Reveal key={paket.id} verzoegerung={i * 60} className="h-full">
               <article
-                className={`flex h-full flex-col rounded-lg p-6 ${
+                className={`karte-heben flex h-full flex-col rounded-lg p-6 ${
                   hervor
                     ? 'bg-anthrazit text-offwhite shadow-weich-lg ring-2 ring-elektroblau'
                     : inaktiv
@@ -34,10 +34,19 @@ export default function Pakete() {
 
                 <p
                   className={`mt-2 text-sm leading-relaxed ${
-                    hervor ? 'text-grau' : inaktiv ? 'text-grau-stark' : 'text-grau-stark'
+                    hervor ? 'text-grau' : 'text-grau-stark'
                   }`}
                 >
                   {paket.einzeiler}
+                </p>
+
+                {/* Entscheidungshilfe: Wer sich hier wiedererkennt, muss nicht vergleichen. */}
+                <p
+                  className={`mt-3 border-l-2 pl-3 text-[0.85rem] leading-snug ${
+                    hervor ? 'border-elektroblau text-offwhite' : 'border-elektroblau/50 text-anthrazit'
+                  } ${inaktiv ? 'border-grau/40 text-grau-stark' : ''}`}
+                >
+                  {paket.fuerWen}
                 </p>
 
                 <p className="mt-5 flex items-baseline gap-1.5">

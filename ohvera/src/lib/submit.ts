@@ -1,61 +1,119 @@
 /* ==================================================================
    Versand aller Formulare — die einzige Stelle im Projekt, die Daten
-   nach außen schickt.
+   nach außen gibt.
    ------------------------------------------------------------------
-   Es gibt derzeit KEIN Backend. Trage die Adresse, an die Anfragen
-   gehen sollen, in die Konstante LEAD_ENDPOINT ein (z. B. ein
-   Formulardienst oder eine eigene Funktion).
+   AKTUELLER WEG (ohne Backend):
+   Die Formulare schicken nichts an einen Server. Die Eingaben werden im
+   Browser zu einer lesbaren Nachricht zusammengesetzt; beim Abschicken
+   öffnet sich WhatsApp oder das E-Mail-Programm mit fertigem Text.
+   Erst das Senden dort bringt die Anfrage an — genau so steht es auch
+   in der Datenschutzerklärung.
 
-   Solange LEAD_ENDPOINT leer ist, wird bewusst KEIN Erfolg vorgetäuscht:
-   Die Formulare zeigen dann eine ehrliche Fehlermeldung mit den
-   hinterlegten Kontaktwegen.
+   SPÄTERER WEG (mit Backend):
+   Sobald in LEAD_ENDPOINT eine Adresse steht, zeigen die Formulare
+   stattdessen einen einzelnen Absenden-Knopf und schicken die Daten
+   per POST dorthin. Der Rest der Seite bleibt unverändert.
    ================================================================== */
 
-/** Ziel-URL für Formularanfragen. Leer lassen = Versand deaktiviert. */
+import { kontakt, istPlatzhalter, marke } from '../content/site';
+
+/** Ziel-URL für serverseitigen Versand. Leer = WhatsApp und E-Mail. */
 export const LEAD_ENDPOINT = '';
 
-export type LeadTyp = 'kampagne' | 'standortpartner' | 'kontakt';
+/** true, sobald ein Endpoint hinterlegt ist. */
+export const versandEingerichtet = LEAD_ENDPOINT !== '';
 
+export type LeadTyp = 'kampagne' | 'standortpartner' | 'kontakt';
+export type Versandweg = 'whatsapp' | 'email';
 export type LeadDaten = Record<string, string | number | boolean | undefined>;
 
-export type SubmitErgebnis =
-  | { ok: true }
-  | {
-      ok: false;
-      grund: 'kein-endpoint' | 'netzwerk' | 'server' | 'spam';
-      nachricht: string;
-    };
+/** Eine Zeile der fertigen Nachricht. */
+export type Nachrichtenzeile = { bezeichnung: string; wert: string };
+
+export type VersandErgebnis =
+  | { ok: true; weg: Versandweg }
+  | { ok: false; grund: 'kein-kontakt' | 'spam' | 'netzwerk' | 'server'; nachricht: string };
+
+const BETREFF: Record<LeadTyp, string> = {
+  kampagne: 'Kampagnenanfrage über ohvera.de',
+  standortpartner: 'Standort anbieten über ohvera.de',
+  kontakt: 'Nachricht über ohvera.de',
+};
 
 const FEHLERTEXTE = {
-  'kein-endpoint':
-    'Der Online-Versand ist noch nicht eingerichtet — deine Anfrage wurde daher nicht abgeschickt. Bitte schick mir die Angaben direkt per E-Mail, Telefon oder WhatsApp. Ich lasse das hier bewusst so stehen, statt dir einen Versand vorzuspielen, der nicht stattfindet.',
+  'kein-kontakt':
+    'Dieser Weg ist noch nicht eingerichtet — deine Anfrage wurde deshalb nicht abgeschickt. Bitte nutz den anderen Knopf oder melde dich direkt bei mir. Ich lasse das hier bewusst so stehen, statt dir einen Versand vorzuspielen, der nicht stattfindet.',
+  spam: 'Die Anfrage wurde nicht abgeschickt.',
   netzwerk:
-    'Die Verbindung hat nicht geklappt. Bitte prüfe deine Internetverbindung und versuch es noch einmal — oder melde dich direkt bei mir.',
+    'Die Verbindung hat nicht geklappt. Bitte prüf deine Internetverbindung und versuch es noch einmal — oder melde dich direkt bei mir.',
   server:
     'Auf meiner Seite ist etwas schiefgelaufen, deine Anfrage ist nicht angekommen. Bitte versuch es später noch einmal oder melde dich direkt bei mir.',
-  spam: 'Die Anfrage wurde nicht abgeschickt.',
 } as const;
 
+const nurZiffern = (wert: string) => wert.replace(/[^\d+]/g, '').replace(/^\+/, '');
+
+/** Baut aus den Formularangaben eine Nachricht, die man auch lesen kann. */
+export function nachrichtErzeugen(typ: LeadTyp, zeilen: Nachrichtenzeile[]): string {
+  const inhalt = zeilen
+    .filter((zeile) => zeile.wert.trim() !== '')
+    .map((zeile) => `${zeile.bezeichnung}: ${zeile.wert.trim()}`)
+    .join('\n');
+
+  return `${BETREFF[typ]}\n\n${inhalt}\n\n— gesendet über ${marke.domain}`;
+}
+
 /**
- * Schickt eine Anfrage ab.
- *
- * @param typ     Welches Formular gesendet wurde
- * @param daten   Die Formularfelder
- * @param dateien Optionale Datei-Anhänge (nur Standortpartner-Formular)
+ * Öffnet WhatsApp oder das E-Mail-Programm mit fertiger Nachricht.
+ * Muss direkt aus einem Klick heraus aufgerufen werden, sonst blockiert
+ * der Browser das Fenster.
+ */
+export function anfrageOeffnen(
+  typ: LeadTyp,
+  weg: Versandweg,
+  zeilen: Nachrichtenzeile[],
+  honigtopf = '',
+): VersandErgebnis {
+  // Honeypot: ein unsichtbares Feld, das nur automatisierte Skripte ausfüllen.
+  if (honigtopf.trim() !== '') {
+    return { ok: false, grund: 'spam', nachricht: FEHLERTEXTE.spam };
+  }
+
+  const text = nachrichtErzeugen(typ, zeilen);
+
+  if (weg === 'whatsapp') {
+    if (!kontakt.whatsappAktiv || istPlatzhalter(kontakt.whatsappNummer)) {
+      return { ok: false, grund: 'kein-kontakt', nachricht: FEHLERTEXTE['kein-kontakt'] };
+    }
+    const ziel = `https://wa.me/${nurZiffern(kontakt.whatsappNummer)}?text=${encodeURIComponent(text)}`;
+    window.open(ziel, '_blank', 'noopener,noreferrer');
+    return { ok: true, weg };
+  }
+
+  if (istPlatzhalter(kontakt.email)) {
+    return { ok: false, grund: 'kein-kontakt', nachricht: FEHLERTEXTE['kein-kontakt'] };
+  }
+
+  const betreff = encodeURIComponent(BETREFF[typ]);
+  const koerper = encodeURIComponent(text);
+  window.location.href = `mailto:${kontakt.email}?subject=${betreff}&body=${koerper}`;
+  return { ok: true, weg };
+}
+
+/**
+ * Serverseitiger Versand. Wird erst genutzt, wenn LEAD_ENDPOINT gesetzt ist.
+ * Ohne Endpoint wird bewusst kein Erfolg vorgetäuscht.
  */
 export async function submitLead(
   typ: LeadTyp,
   daten: LeadDaten,
   dateien: File[] = [],
-): Promise<SubmitErgebnis> {
-  // Honeypot: Ein unsichtbares Feld, das nur automatisierte Skripte ausfüllen.
+): Promise<VersandErgebnis> {
   if (typeof daten.website === 'string' && daten.website.trim() !== '') {
     return { ok: false, grund: 'spam', nachricht: FEHLERTEXTE.spam };
   }
 
   if (!LEAD_ENDPOINT) {
-    // Kein Endpoint hinterlegt: ehrlich scheitern statt Erfolg vortäuschen.
-    return { ok: false, grund: 'kein-endpoint', nachricht: FEHLERTEXTE['kein-endpoint'] };
+    return { ok: false, grund: 'kein-kontakt', nachricht: FEHLERTEXTE['kein-kontakt'] };
   }
 
   try {
@@ -77,15 +135,9 @@ export async function submitLead(
       });
     }
 
-    if (!antwort.ok) {
-      return { ok: false, grund: 'server', nachricht: FEHLERTEXTE.server };
-    }
-
-    return { ok: true };
+    if (!antwort.ok) return { ok: false, grund: 'server', nachricht: FEHLERTEXTE.server };
+    return { ok: true, weg: 'email' };
   } catch {
     return { ok: false, grund: 'netzwerk', nachricht: FEHLERTEXTE.netzwerk };
   }
 }
-
-/** true, sobald ein Endpoint hinterlegt ist. */
-export const versandEingerichtet = LEAD_ENDPOINT !== '';

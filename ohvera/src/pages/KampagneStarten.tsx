@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { kampagnenformular, pakete, seo } from '../content/site';
 import { useSeo } from '../lib/seo';
-import { submitLead } from '../lib/submit';
+import type { Nachrichtenzeile, Versandweg } from '../lib/submit';
 import {
   fehltPflichtfeld,
   hatFehler,
@@ -21,6 +21,7 @@ import {
   Textfeld,
 } from '../components/forms/Felder';
 import Versandhinweis from '../components/forms/Versandhinweis';
+import Versandknoepfe from '../components/forms/Versandknoepfe';
 
 type Formulardaten = {
   ziel: string;
@@ -120,37 +121,33 @@ export default function KampagneStarten() {
     setSchritt((s) => Math.max(s - 1, 0));
   }
 
-  async function absenden(e: React.FormEvent) {
-    e.preventDefault();
+  /** Prüft den letzten Schritt und meldet, ob abgeschickt werden darf. */
+  function pruefeVorVersand(): boolean {
     const gefunden = pruefeSchritt(ANZAHL_SCHRITTE - 1);
     setFehler(gefunden);
-    if (hatFehler(gefunden)) return;
-
-    setSendet(true);
+    if (hatFehler(gefunden)) return false;
     setVersandFehler(null);
+    return true;
+  }
 
-    const ergebnis = await submitLead('kampagne', {
-      ziel: daten.ziel,
-      paket: daten.paket,
-      start: daten.start,
-      material: daten.material,
-      name: daten.name,
-      unternehmen: daten.unternehmen,
-      branche: daten.branche,
-      email: daten.email,
-      telefon: daten.telefon,
-      nachricht: daten.nachricht,
-      datenschutz: daten.datenschutz,
-      website: daten.website,
-    });
+  /** Die Angaben in der Reihenfolge, in der sie in der Nachricht stehen. */
+  function nachrichtenzeilen(): Nachrichtenzeile[] {
+    return [
+      { bezeichnung: 'Name', wert: daten.name },
+      { bezeichnung: 'Unternehmen', wert: daten.unternehmen },
+      { bezeichnung: 'Branche', wert: daten.branche },
+      { bezeichnung: 'E-Mail', wert: daten.email },
+      { bezeichnung: 'Telefon', wert: daten.telefon },
+      { bezeichnung: 'Beworben werden soll', wert: daten.ziel },
+      { bezeichnung: 'Paket', wert: daten.paket },
+      { bezeichnung: 'Start', wert: daten.start },
+      { bezeichnung: 'Material', wert: daten.material },
+      { bezeichnung: 'Nachricht', wert: daten.nachricht },
+    ];
+  }
 
-    setSendet(false);
-
-    if (ergebnis.ok) {
-      navigate('/danke', { state: { typ: 'kampagne' } });
-    } else {
-      setVersandFehler(ergebnis.nachricht);
-    }
+  function beiErfolg(weg: Versandweg) {
+    navigate('/danke', { state: { typ: 'kampagne', weg } });
   }
 
   const istKontaktschritt = schritt === ANZAHL_SCHRITTE - 1;
@@ -195,7 +192,7 @@ export default function KampagneStarten() {
             </p>
           </div>
 
-          <form onSubmit={absenden} noValidate className="relative">
+          <form onSubmit={(e) => e.preventDefault()} noValidate className="relative">
             <Honigtopf wert={daten.website} onChange={(wert) => setzeWert('website', wert)} />
 
             <h2 className="sr-only" tabIndex={-1} ref={ueberschrift}>
@@ -300,7 +297,7 @@ export default function KampagneStarten() {
             )}
 
             {/* Steuerung */}
-            <div className="mt-10 flex flex-col-reverse gap-3 border-t pt-6 trennlinie sm:flex-row sm:justify-between">
+            <div className="mt-10 flex flex-col-reverse gap-6 border-t pt-6 trennlinie sm:flex-row sm:items-start sm:justify-between">
               {schritt > 0 ? (
                 <button type="button" className="btn-sekundaer-hell" onClick={zurueck}>
                   Zurück
@@ -310,9 +307,16 @@ export default function KampagneStarten() {
               )}
 
               {istKontaktschritt ? (
-                <button type="submit" className="btn-primaer" disabled={sendet}>
-                  {sendet ? 'Wird gesendet …' : 'Anfrage absenden'}
-                </button>
+                <Versandknoepfe
+                  typ="kampagne"
+                  pruefen={pruefeVorVersand}
+                  zeilen={nachrichtenzeilen}
+                  honigtopf={daten.website}
+                  onFehler={setVersandFehler}
+                  onErfolg={beiErfolg}
+                  sendet={sendet}
+                  setSendet={setSendet}
+                />
               ) : (
                 <button type="button" className="btn-primaer" onClick={weiter}>
                   Weiter

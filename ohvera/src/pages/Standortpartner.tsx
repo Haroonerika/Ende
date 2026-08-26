@@ -8,7 +8,7 @@ import {
   uploadRegeln,
 } from '../content/site';
 import { useSeo } from '../lib/seo';
-import { submitLead } from '../lib/submit';
+import { versandEingerichtet, type Nachrichtenzeile, type Versandweg } from '../lib/submit';
 import {
   fehltPflichtfeld,
   hatFehler,
@@ -30,6 +30,7 @@ import {
   Textfeld,
 } from '../components/forms/Felder';
 import Versandhinweis from '../components/forms/Versandhinweis';
+import Versandknoepfe from '../components/forms/Versandknoepfe';
 
 const LEER = {
   name: '',
@@ -79,9 +80,7 @@ export default function Standortpartner() {
     setDateifehler([]);
   }
 
-  async function absenden(e: React.FormEvent) {
-    e.preventDefault();
-
+  function pruefeVorVersand(): boolean {
     const gefunden: Fehlerliste = {
       name: fehltPflichtfeld(daten.name, 'deinen Namen') ?? '',
       unternehmen: fehltPflichtfeld(daten.unternehmen, 'den Namen deines Betriebs') ?? '',
@@ -98,19 +97,31 @@ export default function Standortpartner() {
     setFehler(gefunden);
     if (hatFehler(gefunden)) {
       document.getElementById('partnerformular')?.scrollIntoView({ block: 'start' });
-      return;
+      return false;
     }
-
-    setSendet(true);
     setVersandFehler(null);
-    const ergebnis = await submitLead('standortpartner', { ...daten }, dateien);
-    setSendet(false);
+    return true;
+  }
 
-    if (ergebnis.ok) {
-      navigate('/danke', { state: { typ: 'standortpartner' } });
-    } else {
-      setVersandFehler(ergebnis.nachricht);
-    }
+  function nachrichtenzeilen(): Nachrichtenzeile[] {
+    return [
+      { bezeichnung: 'Name', wert: daten.name },
+      { bezeichnung: 'Unternehmen', wert: daten.unternehmen },
+      { bezeichnung: 'Art des Standorts', wert: daten.art },
+      { bezeichnung: 'Adresse', wert: daten.adresse },
+      { bezeichnung: 'E-Mail', wert: daten.email },
+      { bezeichnung: 'Telefon', wert: daten.telefon },
+      { bezeichnung: 'Schaufenstergröße', wert: daten.fenstergroesse },
+      { bezeichnung: 'Ausrichtung des Fensters', wert: daten.ausrichtung },
+      { bezeichnung: 'Öffnungszeiten', wert: daten.oeffnungszeiten },
+      { bezeichnung: 'Strom in Fensternähe', wert: daten.strom },
+      { bezeichnung: 'WLAN', wert: daten.wlan },
+      { bezeichnung: 'Nachricht', wert: daten.nachricht },
+    ];
+  }
+
+  function beiErfolg(weg: Versandweg) {
+    navigate('/danke', { state: { typ: 'standortpartner', weg } });
   }
 
   return (
@@ -181,7 +192,7 @@ export default function Standortpartner() {
           <p className="fliess mt-4 text-grau-stark">{seiteStandortpartner.formularEinleitung}</p>
           <p className="hilfstext mt-4">Mit * markierte Felder sind Pflichtfelder.</p>
 
-          <form onSubmit={absenden} noValidate className="relative mt-8 space-y-5">
+          <form onSubmit={(e) => e.preventDefault()} noValidate className="relative mt-8 space-y-5">
             <Honigtopf wert={daten.website} onChange={(wert) => setzeWert('website', wert)} />
 
             <Textfeld
@@ -290,7 +301,10 @@ export default function Standortpartner() {
               />
             </div>
 
-            {/* Foto-Upload */}
+            {/* Foto-Upload — nur sinnvoll, wenn ein Empfänger Dateien annimmt.
+                Ohne Backend geht die Anfrage über WhatsApp oder E-Mail; Fotos
+                hängst du dort direkt an. */}
+            {versandEingerichtet ? (
             <div>
               <label htmlFor="p-fotos" className="label">
                 Fotos der Fläche
@@ -346,6 +360,16 @@ export default function Standortpartner() {
                 </div>
               )}
             </div>
+            ) : (
+              <div className="rounded-lg border border-dashed border-grau/40 p-5">
+                <h3 className="text-[0.975rem] font-semibold">Fotos vom Schaufenster</h3>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-grau-stark">
+                  Die schickst du am einfachsten direkt in den Chat, der sich beim Abschicken
+                  öffnet — zwei Bilder von außen und eines von innen reichen mir. Bitte keine
+                  Aufnahmen, auf denen Personen erkennbar sind.
+                </p>
+              </div>
+            )}
 
             <Textfeld
               id="p-nachricht"
@@ -374,9 +398,17 @@ export default function Standortpartner() {
             {versandFehler && <Versandhinweis nachricht={versandFehler} />}
 
             <div className="border-t pt-6 trennlinie">
-              <button type="submit" className="btn-primaer w-full sm:w-auto" disabled={sendet}>
-                {sendet ? 'Wird gesendet …' : 'Fläche anbieten'}
-              </button>
+              <Versandknoepfe
+                typ="standortpartner"
+                pruefen={pruefeVorVersand}
+                zeilen={nachrichtenzeilen}
+                honigtopf={daten.website}
+                onFehler={setVersandFehler}
+                onErfolg={beiErfolg}
+                sendet={sendet}
+                setSendet={setSendet}
+                beschriftung="Fläche anbieten"
+              />
             </div>
           </form>
         </div>

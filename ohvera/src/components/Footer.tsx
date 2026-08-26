@@ -8,7 +8,7 @@ export default function Footer() {
   const jahr = new Date().getFullYear();
 
   return (
-    <footer className="bg-anthrazit px-5 pb-10 pt-16 text-offwhite sm:px-8">
+    <footer className="bg-anthrazit px-5 pb-28 pt-16 text-offwhite sm:px-8 lg:pb-10">
       <div className="huelle">
         <div className="grid gap-10 border-b border-white/10 pb-10 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>

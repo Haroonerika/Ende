@@ -4,12 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { kontakt, seiteKontakt, seo } from '../content/site';
 import { kontaktwege } from '../lib/kontakt';
 import { useSeo } from '../lib/seo';
-import { submitLead } from '../lib/submit';
+import type { Nachrichtenzeile, Versandweg } from '../lib/submit';
 import { fehltPflichtfeld, hatFehler, pruefeEmail, pruefeTelefon, type Fehlerliste } from '../lib/validierung';
 
 import Abschnitt from '../components/Abschnitt';
 import { Honigtopf, Kontrollkaestchen, Textfeld } from '../components/forms/Felder';
 import Versandhinweis from '../components/forms/Versandhinweis';
+import Versandknoepfe from '../components/forms/Versandknoepfe';
 
 const LEER = {
   name: '',
@@ -35,8 +36,7 @@ export default function Kontakt() {
     setFehler((vorher) => ({ ...vorher, [feld]: '' }));
   };
 
-  async function absenden(e: React.FormEvent) {
-    e.preventDefault();
+  function pruefeVorVersand(): boolean {
     const gefunden: Fehlerliste = {
       name: fehltPflichtfeld(daten.name, 'deinen Namen') ?? '',
       email: pruefeEmail(daten.email) ?? '',
@@ -47,15 +47,22 @@ export default function Kontakt() {
         : 'Bitte bestätigen, dass die Datenschutzerklärung gelesen wurde.',
     };
     setFehler(gefunden);
-    if (hatFehler(gefunden)) return;
-
-    setSendet(true);
+    if (hatFehler(gefunden)) return false;
     setVersandFehler(null);
-    const ergebnis = await submitLead('kontakt', { ...daten });
-    setSendet(false);
+    return true;
+  }
 
-    if (ergebnis.ok) navigate('/danke', { state: { typ: 'kontakt' } });
-    else setVersandFehler(ergebnis.nachricht);
+  function nachrichtenzeilen(): Nachrichtenzeile[] {
+    return [
+      { bezeichnung: 'Name', wert: daten.name },
+      { bezeichnung: 'E-Mail', wert: daten.email },
+      { bezeichnung: 'Telefon', wert: daten.telefon },
+      { bezeichnung: 'Nachricht', wert: daten.nachricht },
+    ];
+  }
+
+  function beiErfolg(weg: Versandweg) {
+    navigate('/danke', { state: { typ: 'kontakt', weg } });
   }
 
   return (
@@ -112,7 +119,7 @@ export default function Kontakt() {
           </p>
 
           <div className="karte mt-8 p-6 sm:p-8">
-            <form onSubmit={absenden} noValidate className="relative space-y-5">
+            <form onSubmit={(e) => e.preventDefault()} noValidate className="relative space-y-5">
               <Honigtopf wert={daten.website} onChange={(wert) => setzeWert('website', wert)} />
               <p className="hilfstext">Mit * markierte Felder sind Pflichtfelder.</p>
 
@@ -171,9 +178,17 @@ export default function Kontakt() {
 
               {versandFehler && <Versandhinweis nachricht={versandFehler} />}
 
-              <button type="submit" className="btn-primaer w-full sm:w-auto" disabled={sendet}>
-                {sendet ? 'Wird gesendet …' : 'Nachricht senden'}
-              </button>
+              <Versandknoepfe
+                typ="kontakt"
+                pruefen={pruefeVorVersand}
+                zeilen={nachrichtenzeilen}
+                honigtopf={daten.website}
+                onFehler={setVersandFehler}
+                onErfolg={beiErfolg}
+                sendet={sendet}
+                setSendet={setSendet}
+                beschriftung="Nachricht senden"
+              />
             </form>
           </div>
         </div>

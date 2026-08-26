@@ -24,18 +24,21 @@ steht, wird bewusst **nicht** verlinkt.
 
 ## 2 · Formularversand  (`src/lib/submit.ts`)
 
-- [ ] `LEAD_ENDPOINT` eintragen — die Adresse, an die Anfragen gehen sollen.
+**Eingerichtet:** Die Formulare öffnen beim Abschicken WhatsApp oder das
+E-Mail-Programm mit fertig ausgefüllter Nachricht. Dafür braucht es kein
+Backend — aber die WhatsApp-Nummer und die E-Mail-Adresse aus Abschnitt 1
+müssen eingetragen sein, sonst erscheint eine ehrliche Fehlermeldung statt
+eines Versands.
 
-Solange die Konstante leer ist, wird **kein Erfolg vorgetäuscht**: Alle drei
-Formulare zeigen stattdessen eine ehrliche Fehlermeldung mit den
-Kontaktwegen. Erst danach führt ein erfolgreicher Versand auf `/danke`.
+Optional für später:
 
-Zum Testen genügt ein Formulardienst, der `POST` mit JSON annimmt. Wenn
-Fotos mitgeschickt werden (Standortpartner-Formular), sendet die Funktion
-stattdessen `multipart/form-data`.
+- [ ] `LEAD_ENDPOINT` eintragen, wenn Anfragen einmal direkt auf einem
+      Server ankommen sollen. Dann zeigen die Formulare automatisch einen
+      einzelnen Absenden-Knopf und der Foto-Upload im Standortpartner-
+      Formular erscheint wieder.
 
-**Wichtig:** Der Empfänger muss so eingerichtet sein, dass hochgeladene
-Fotos **nicht öffentlich abrufbar** sind.
+**Wichtig, falls das kommt:** Der Empfänger muss so eingerichtet sein, dass
+hochgeladene Fotos **nicht öffentlich abrufbar** sind.
 
 ## 3 · Foto von Haroon  (`src/content/site.ts`, Abschnitt 9 „person")
 
@@ -47,22 +50,23 @@ ist, zeigt die Seite eine leere, beschriftete Fläche.
 
 ## 4 · Impressum  (`src/content/site.ts`, Abschnitt 17)
 
-- [ ] `[RECHTSFORM EINTRAGEN]`
-- [ ] `[REGISTERANGABEN EINTRAGEN ODER ABSCHNITT LÖSCHEN]`
-- [ ] `[UMSATZSTEUER-IDENTIFIKATIONSNUMMER EINTRAGEN ODER ABSCHNITT ANPASSEN]`
-      — aktuell steht dort die Kleinunternehmerregelung nach § 19 UStG.
+Rechtsform ist eingetragen: Einzelunternehmen, kein Registereintrag,
+Kleinunternehmerregelung nach § 19 UStG. Offen bleibt nur:
+
 - [ ] Anschrift (siehe Abschnitt 1 dieser Liste)
 
 ## 5 · Datenschutzerklärung  (`src/content/site.ts`, Abschnitt 17)
 
-- [ ] `[HOSTING-ANBIETER EINTRAGEN]` und Vertrag zur Auftragsverarbeitung
-- [ ] `[MIT HOSTER KLÄREN UND ANPASSEN]` — werden IP-Adressen gekürzt?
-- [ ] `[SPEICHERDAUER EINTRAGEN, üblich: 7 Tage]` — Server-Logfiles
-- [ ] `[SPEICHERDAUER EINTRAGEN]` — hochgeladene Fotos
-- [ ] `[FORMULAR-EMPFÄNGER / DIENSTLEISTER EINTRAGEN]`
-- [ ] `[ANGABEN ZUM EINGESETZTEN WHATSAPP-DIENST PRÜFEN UND ERGÄNZEN]`
-- [ ] `[ZUSTÄNDIGE BEHÖRDE ANHAND DES TATSÄCHLICHEN SITZES PRÜFEN]`
-- [ ] `[DATUM EINTRAGEN]` — Stand der Erklärung
+Nur noch eine Lücke — ein Wort in der Konstante `hostinganbieter`:
+
+- [ ] `[HOSTING-ANBIETER EINTRAGEN]` — Name des Hosters, sobald entschieden.
+      Bei den meisten Anbietern brauchst du zusätzlich einen Vertrag zur
+      Auftragsverarbeitung (bei Netlify und Vercel ist der in den AGB
+      enthalten und muss nur bestätigt werden).
+
+Alles Übrige ist eingetragen: Logfiles 7 Tage, WhatsApp-Hinweis, zuständige
+Aufsichtsbehörde, Stand der Erklärung. Die Formulare senden nichts an einen
+Server — das steht so drin und stimmt auch.
 
 ## 6 · Rechtsprüfung
 

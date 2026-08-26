@@ -144,6 +144,8 @@ export type Paket = {
   preis: number | null;
   preisZusatz: string;
   einzeiler: string;
+  /** Eine Zeile Entscheidungshilfe: Für wen ist dieses Paket gedacht? */
+  fuerWen: string;
   merkmale: { text: string; hervorgehoben?: boolean }[];
   laufzeit: string;
   empfohlen?: boolean;
@@ -158,6 +160,7 @@ export const pakete: Paket[] = [
     preis: 49,
     preisZusatz: '€ / Monat',
     einzeiler: 'Ein Motiv, ein Platz, laufend im Schaufenster.',
+    fuerWen: 'Für dich, wenn dein Angebot bleibt, wie es ist.',
     merkmale: [
       { text: '1 Werbemotiv, von OHVERA gestaltet' },
       { text: '1× im Monat tauschbar' },
@@ -173,6 +176,7 @@ export const pakete: Paket[] = [
     preis: 89,
     preisZusatz: '€ / Monat',
     einzeiler: 'Drei Motive, die sich in der Schleife abwechseln.',
+    fuerWen: 'Für dich, wenn du mehrere Dinge gleichzeitig zeigen willst.',
     merkmale: [
       { text: '3 Werbemotive, von OHVERA gestaltet' },
       { text: 'Motive wechseln sich automatisch in der Schleife ab' },
@@ -188,6 +192,7 @@ export const pakete: Paket[] = [
     preis: 99,
     preisZusatz: '€ / Monat',
     einzeiler: 'Wöchentlich neues Motiv — und deine Branche bleibt draußen.',
+    fuerWen: 'Für dich, wenn sich dein Angebot oft ändert — oder die Konkurrenz nah ist.',
     merkmale: [
       { text: '5 Werbemotive, von OHVERA gestaltet' },
       {
@@ -211,6 +216,7 @@ export const pakete: Paket[] = [
     preis: null,
     preisZusatz: '',
     einzeiler: 'Ein Motiv auf mehreren Bildschirmen gleichzeitig.',
+    fuerWen: 'Für später, wenn es mehr als einen Standort gibt.',
     merkmale: [
       { text: 'Ausspielung an mehreren Standorten' },
       { text: 'Ein gemeinsamer Ausspielnachweis' },
@@ -220,6 +226,41 @@ export const pakete: Paket[] = [
     hinweis: 'Ab mehreren Standorten verfügbar — in Vorbereitung',
   },
 ];
+
+/** Vier Sätze, die die häufigsten Bedenken vorwegnehmen.
+    Alle vier sind Zusagen, die ohnehin gelten — hier stehen sie nur dort,
+    wo der Kunde über den Preis nachdenkt. */
+export const sicherheiten = [
+  {
+    titel: 'Keine Mindestlaufzeit',
+    text: 'Monatlich kündbar. Bringt es dir nichts, hörst du zum Monatsende auf.',
+  },
+  {
+    titel: 'Kein Werbematerial nötig',
+    text: 'Logo, ein Foto, ein Satz — den Rest gestalte ich. In jedem Paket enthalten.',
+  },
+  {
+    titel: 'Die Motive gehören dir',
+    text: 'Auch nach der Kampagne. Instagram, Schaufenster, gedruckt — wie du willst.',
+  },
+  {
+    titel: 'Ausfall wird ausgeglichen',
+    text: 'Steht der Bildschirm länger als 24 Stunden, verlängert sich deine Laufzeit tagesgenau.',
+  },
+];
+
+/** Der Preis, heruntergebrochen. Reine Division — keine Aussage darüber,
+    was die Werbung bringt oder wie viele Menschen sie sehen. */
+export const kostenrechnung = {
+  titel: 'Was 49 € im Monat bedeuten',
+  zeilen: [
+    { bezeichnung: 'Im Monat', wert: '49 €' },
+    { bezeichnung: 'Am Tag', wert: '1,63 €' },
+    { bezeichnung: 'Je Ausspielung', wert: '0,25 Cent' },
+  ],
+  hinweis:
+    'Das ist geteilt, nicht gemessen: 49 € ÷ 30 Tage ÷ 648 Ausspielungen. Es sagt, was ein Durchlauf kostet — nicht, wer ihn sieht.',
+};
 
 /** Steht direkt unter den Paketkarten. */
 export const paketHinweise = {
@@ -344,6 +385,27 @@ export const startseite = {
       'Ausspielung wird nachgewiesen',
       'Persönlicher Ansprechpartner vor Ort',
     ],
+    /* Preis direkt im Hero: Wer den Preis nicht findet, fragt nicht nach —
+       er geht. */
+    preisanker: {
+      ab: 'Ab 49 € im Monat',
+      zusatz: 'Gestaltung inklusive. Monatlich kündbar.',
+    },
+  },
+
+  /* 9.1b Auf einen Blick — beantwortet „Was kaufe ich eigentlich?"
+     in fünf Zahlen, direkt unter dem Hero. */
+  aufEinenBlick: {
+    titel: 'Was du buchst, in Zahlen',
+    hinweis:
+      'Das sind Angaben zur Technik und zur Schleife — keine Reichweite. Wie viele Menschen vorbeigehen, messe ich nicht.',
+    zahlen: [
+      { wert: 10, einheit: 'Sekunden', bezeichnung: 'läuft dein Spot je Durchlauf' },
+      { wert: ausspielungenProTag, einheit: 'Mal am Tag', bezeichnung: 'wird er ausgespielt' },
+      { wert: 18, einheit: 'Stunden', bezeichnung: 'Betrieb, 07:00 bis 01:00 Uhr' },
+      { wert: 8, einheit: 'von 10 Plätzen', bezeichnung: 'sind überhaupt verkäuflich' },
+      { wert: 1, einheit: 'Ansprechpartner', bezeichnung: 'den du persönlich erreichst' },
+    ],
   },
 
   /* 9.2 Problem -------------------------------------------------- */
@@ -368,20 +430,26 @@ export const startseite = {
   /* 9.3 So funktioniert's ---------------------------------------- */
   ablauf: {
     h2: "So funktioniert's.",
+    unterzeile:
+      'Vier Schritte. Mehr als Schritt 1 musst du nicht selbst machen.',
     schritte: [
       {
+        marke: 'Heute',
         titel: 'Du sagst, was beworben werden soll.',
         text: 'Logo, ein gutes Foto, ein Satz zum Angebot. Per WhatsApp reicht.',
       },
       {
+        marke: 'Wenige Tage später',
         titel: 'Ich gestalte dein Motiv.',
         text: 'Fertig in wenigen Tagen, eine Korrekturrunde inklusive.',
       },
       {
+        marke: 'Sobald du freigibst',
         titel: 'Dein Spot läuft.',
         text: `${produkt.spotSekunden} Sekunden, ${ausspielungenProTag} Mal am Tag, von 7 Uhr morgens bis 1 Uhr nachts.`,
       },
       {
+        marke: 'Am Monatsende',
         titel: 'Du bekommst den Nachweis.',
         text: 'Ausspielprotokoll am Monatsende — und du kannst jederzeit selbst vorbeigehen.',
       },
@@ -460,6 +528,10 @@ export const startseite = {
   /* 9.9 FAQ-Überschrift ------------------------------------------ */
   faqAbschnitt: {
     h2: 'Fragen, die mir gestellt werden.',
+    unterzeile: 'Alles, was Kunden vor der ersten Buchung wissen wollen.',
+    abschlussTitel: 'Deine Frage ist nicht dabei?',
+    abschlussText:
+      'Dann schreib sie mir. Es gibt keine Hotline und kein Ticketsystem — die Antwort kommt von mir persönlich, meistens noch am selben Tag.',
   },
 
   /* 9.10 Abschluss ----------------------------------------------- */
@@ -820,6 +892,17 @@ export const partnerformular = {
   },
 };
 
+/** Was auf der Dankeseite steht, wenn die Nachricht über WhatsApp oder
+    das E-Mail-Programm vorbereitet wurde. Bewusst deutlich: Ohne den
+    letzten Klick kommt nichts an. */
+export const versandHinweis = {
+  titel: 'Fast geschafft — ein Klick fehlt noch.',
+  whatsapp:
+    'WhatsApp hat sich mit deiner fertigen Nachricht geöffnet. Bei mir ist sie erst, wenn du dort auf Senden gedrückt hast. Falls sich nichts geöffnet hat, schreib mir einfach direkt.',
+  email:
+    'Dein E-Mail-Programm hat sich mit der fertigen Nachricht geöffnet. Bei mir ist sie erst, wenn du dort auf Senden gedrückt hast. Falls sich nichts geöffnet hat, schreib mir einfach direkt.',
+};
+
 /** Grenzwerte für den Foto-Upload — clientseitig geprüft. */
 export const uploadRegeln = {
   maxDateien: 3,
@@ -915,6 +998,9 @@ export const seo: Record<
    Alle Platzhalter in eckigen Klammern müssen ersetzt werden.
    ================================================================== */
 
+/** Ein Wort ändern genügt: Der Name taucht in der Datenschutzerklärung auf. */
+export const hostinganbieter = '[HOSTING-ANBIETER EINTRAGEN]';
+
 export const rechtshinweis =
   'Dieses Dokument ist ein Entwurf und muss vor der Veröffentlichung juristisch geprüft werden. Alle Angaben in eckigen Klammern sind noch einzutragen.';
 
@@ -929,8 +1015,7 @@ export const impressum: Rechtsabschnitt[] = [
     titel: 'Angaben gemäß § 5 DDG',
     absaetze: [
       'OHVERA',
-      '[RECHTSFORM EINTRAGEN — z. B. Einzelunternehmen]',
-      'Inhaber: Haroon Mishkoo',
+      'Einzelunternehmen, Inhaber: Haroon Mishkoo',
       '[STRASSE UND HAUSNUMMER EINTRAGEN]',
       '[PLZ UND ORT EINTRAGEN]',
       'Deutschland',
@@ -944,16 +1029,10 @@ export const impressum: Rechtsabschnitt[] = [
     ],
   },
   {
-    titel: 'Registereintrag',
-    absaetze: [
-      '[REGISTERANGABEN EINTRAGEN ODER ABSCHNITT LÖSCHEN — bei einem Einzelunternehmen ohne Handelsregistereintrag entfällt dieser Abschnitt.]',
-    ],
-  },
-  {
     titel: 'Umsatzsteuer',
     absaetze: [
       'Gemäß § 19 Abs. 1 UStG wird keine Umsatzsteuer berechnet und daher auch nicht ausgewiesen (Kleinunternehmerregelung).',
-      '[UMSATZSTEUER-IDENTIFIKATIONSNUMMER EINTRAGEN ODER ABSCHNITT ANPASSEN, falls sich die Besteuerung ändert.]',
+      'Eine Umsatzsteuer-Identifikationsnummer besteht daher nicht. Sollte sich die Besteuerung ändern, ist dieser Abschnitt anzupassen.',
     ],
   },
   {
@@ -1019,11 +1098,11 @@ export const datenschutz: Rechtsabschnitt[] = [
   {
     titel: '3. Hosting und Server-Logfiles',
     absaetze: [
-      'Diese Website wird bei [HOSTING-ANBIETER EINTRAGEN] gehostet. Der Anbieter verarbeitet in unserem Auftrag personenbezogene Daten auf Grundlage eines Vertrags zur Auftragsverarbeitung nach Art. 28 DSGVO.',
+      `Diese Website wird bei ${hostinganbieter} gehostet. Der Anbieter verarbeitet in meinem Auftrag personenbezogene Daten auf Grundlage eines Vertrags zur Auftragsverarbeitung nach Art. 28 DSGVO.`,
       'Beim Aufruf der Website werden automatisch Informationen in sogenannten Server-Logfiles gespeichert, die der Browser übermittelt:',
     ],
     liste: [
-      'Gekürzte oder vollständige IP-Adresse [MIT HOSTER KLÄREN UND ANPASSEN]',
+      'IP-Adresse',
       'Datum und Uhrzeit des Zugriffs',
       'Aufgerufene Seite und übertragene Datenmenge',
       'Referrer-URL, Browsertyp und Betriebssystem',
@@ -1032,7 +1111,7 @@ export const datenschutz: Rechtsabschnitt[] = [
   {
     titel: '4. Rechtsgrundlage der Logfile-Verarbeitung',
     absaetze: [
-      'Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse liegt im technisch fehlerfreien Betrieb und in der Sicherheit der Website. Die Daten werden nach [SPEICHERDAUER EINTRAGEN, üblich: 7 Tage] gelöscht.',
+      'Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse liegt im technisch fehlerfreien Betrieb und in der Sicherheit der Website. Die Logfiles werden spätestens nach 7 Tagen gelöscht.',
     ],
   },
   {
@@ -1040,24 +1119,24 @@ export const datenschutz: Rechtsabschnitt[] = [
     absaetze: [
       'Wenn Sie mich per E-Mail, Telefon oder Messenger kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage und für Anschlussfragen gespeichert.',
       'Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Anfrage der Anbahnung oder Erfüllung eines Vertrags dient, im Übrigen Art. 6 Abs. 1 lit. f DSGVO.',
-      'Hinweis zu WhatsApp: Bei einer Kontaktaufnahme über WhatsApp werden Daten durch den Betreiber WhatsApp Ireland Ltd. verarbeitet. Auf diese Verarbeitung habe ich keinen Einfluss. Wenn Sie das vermeiden möchten, nutzen Sie bitte E-Mail, Telefon oder das Formular. [ANGABEN ZUM EINGESETZTEN WHATSAPP-DIENST PRÜFEN UND ERGÄNZEN]',
+      'Hinweis zu WhatsApp: Bei einer Kontaktaufnahme über WhatsApp werden Daten durch den Betreiber WhatsApp Ireland Ltd., 4 Grand Canal Square, Dublin, verarbeitet. Auf diese Verarbeitung habe ich keinen Einfluss; es gelten die Datenschutzbestimmungen von WhatsApp. Wenn Sie das vermeiden möchten, nutzen Sie bitte E-Mail oder Telefon.',
     ],
   },
   {
     titel: '6. Formulare auf dieser Website',
     absaetze: [
-      'Über die Formulare „Kampagne starten", „Standortpartner werden" und das Kontaktformular werden die von Ihnen eingegebenen Daten übermittelt, um Ihre Anfrage zu bearbeiten.',
+      'Die Formulare „Kampagne starten", „Standortpartner werden" und das Kontaktformular senden Ihre Eingaben nicht an einen Server dieser Website.',
+      'Ihre Angaben werden ausschließlich in Ihrem Browser zu einer Nachricht zusammengestellt. Beim Abschicken öffnet sich Ihr WhatsApp oder Ihr E-Mail-Programm mit einer bereits ausgefüllten Nachricht. Erst wenn Sie dort selbst auf Senden drücken, erreicht mich die Anfrage. Bis dahin verlassen die Daten Ihr Gerät nicht.',
       'Pflichtangaben sind als solche gekennzeichnet. Die Angabe der Branche ist erforderlich, um die zugesagte Branchenexklusivität auf dem jeweiligen Bildschirm prüfen zu können.',
-      'Zum Schutz vor automatisierten Zusendungen enthält jedes Formular ein verstecktes Feld (Honeypot). Es werden dabei keine personenbezogenen Daten an Dritte übermittelt und keine Cookies gesetzt.',
-      'Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) sowie Art. 6 Abs. 1 lit. a DSGVO, soweit Sie in die Verarbeitung eingewilligt haben. Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen.',
-      'Die Übermittlung erfolgt an [FORMULAR-EMPFÄNGER / DIENSTLEISTER EINTRAGEN]. Solange kein Empfänger eingerichtet ist, werden über die Formulare keine Daten versendet.',
+      'Zum Schutz vor automatisierten Zusendungen enthält jedes Formular ein verstecktes Feld (Honeypot). Es werden dabei keine Cookies gesetzt.',
+      'Nach Eingang der Nachricht verarbeite ich Ihre Angaben, um die Anfrage zu bearbeiten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen), im Übrigen Art. 6 Abs. 1 lit. f DSGVO.',
     ],
   },
   {
-    titel: '7. Foto-Upload im Standortpartner-Formular',
+    titel: '7. Fotos Ihrer Fläche',
     absaetze: [
-      'Im Standortpartner-Formular können Sie freiwillig bis zu drei Fotos Ihrer Fläche hochladen. Die Dateien werden ausschließlich zur Prüfung der Fläche verwendet, nicht veröffentlicht und nicht öffentlich zugänglich gemacht.',
-      'Bitte laden Sie keine Bilder hoch, auf denen Personen erkennbar sind. Die Dateien werden nach Abschluss der Prüfung gelöscht, spätestens nach [SPEICHERDAUER EINTRAGEN].',
+      'Wenn Sie mir Fotos Ihres Schaufensters schicken, verwende ich sie ausschließlich zur Prüfung der Fläche. Sie werden nicht veröffentlicht und nicht öffentlich zugänglich gemacht.',
+      'Bitte schicken Sie keine Bilder, auf denen Personen erkennbar sind. Die Dateien werden nach Abschluss der Prüfung gelöscht, spätestens nach sechs Monaten.',
     ],
   },
   {
@@ -1082,7 +1161,7 @@ export const datenschutz: Rechtsabschnitt[] = [
   {
     titel: '10. Beschwerderecht bei der Aufsichtsbehörde',
     absaetze: [
-      'Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Zuständig ist in der Regel die Behörde am Ort Ihres Wohnsitzes oder am Sitz des Verantwortlichen: Die Landesbeauftragte für den Datenschutz Niedersachsen. [ZUSTÄNDIGE BEHÖRDE ANHAND DES TATSÄCHLICHEN SITZES PRÜFEN]',
+      'Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Zuständig ist in der Regel die Behörde am Ort Ihres Wohnsitzes oder am Sitz des Verantwortlichen. Für Niedersachsen ist das die Landesbeauftragte für den Datenschutz Niedersachsen, Prinzenstraße 5, 30159 Hannover.',
     ],
   },
   {
@@ -1094,7 +1173,7 @@ export const datenschutz: Rechtsabschnitt[] = [
   {
     titel: '12. Stand',
     absaetze: [
-      'Stand dieser Datenschutzerklärung: [DATUM EINTRAGEN]. Bei Änderungen an der Website wird sie angepasst.',
+      `Stand dieser Datenschutzerklärung: ${new Date().toLocaleDateString('de-DE', { month: 'long', year: 'numeric' })}. Bei Änderungen an der Website wird sie angepasst.`,
     ],
   },
 ];

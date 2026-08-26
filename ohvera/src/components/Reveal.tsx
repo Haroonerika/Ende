@@ -5,12 +5,27 @@ type Props = {
   children: ReactNode;
   /** Verzögerung in Millisekunden, für gestaffelte Reihen */
   verzoegerung?: number;
+  /** Aus welcher Richtung das Element einläuft */
+  richtung?: 'hoch' | 'links' | 'rechts' | 'zoom';
   className?: string;
   as?: ElementType;
 };
 
+const richtungsklasse = {
+  hoch: '',
+  links: 'reveal-links',
+  rechts: 'reveal-rechts',
+  zoom: 'reveal-zoom',
+} as const;
+
 /** Dezentes Scroll-Reveal. Bei reduzierter Bewegung sofort sichtbar. */
-export default function Reveal({ children, verzoegerung = 0, className = '', as }: Props) {
+export default function Reveal({
+  children,
+  verzoegerung = 0,
+  richtung = 'hoch',
+  className = '',
+  as,
+}: Props) {
   const Tag: ElementType = as ?? 'div';
   const ref = useRef<HTMLElement>(null);
   const [sichtbar, setSichtbar] = useState(() => bewegungReduziert());
@@ -40,7 +55,7 @@ export default function Reveal({ children, verzoegerung = 0, className = '', as 
   return (
     <Tag
       ref={ref}
-      className={`reveal ${sichtbar ? 'sichtbar' : ''} ${className}`}
+      className={`reveal ${richtungsklasse[richtung]} ${sichtbar ? 'sichtbar' : ''} ${className}`}
       style={verzoegerung ? { transitionDelay: `${verzoegerung}ms` } : undefined}
     >
       {children}

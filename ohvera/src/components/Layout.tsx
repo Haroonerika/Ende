@@ -3,6 +3,8 @@ import { marke } from '../content/site';
 import { useJsonLd } from '../lib/seo';
 import Footer from './Footer';
 import Header from './Header';
+import MobilCta from './MobilCta';
+import Scrollbalken from './Scrollbalken';
 
 export default function Layout() {
   /* Strukturierte Daten: nur Organization — bewusst KEIN LocalBusiness,
@@ -25,11 +27,13 @@ export default function Layout() {
       >
         Zum Inhalt springen
       </a>
+      <Scrollbalken />
       <Header />
       <main id="inhalt">
         <Outlet />
       </main>
       <Footer />
+      <MobilCta />
     </>
   );
 }

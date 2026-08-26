@@ -22,7 +22,11 @@ import Reveal from '../components/Reveal';
 import Schaufenster from '../components/Schaufenster';
 import Schleife from '../components/Schleife';
 import Schritte from '../components/Schritte';
+import Sicherheiten from '../components/Sicherheiten';
 import Standortkarte from '../components/Standortkarte';
+import Titel from '../components/Titel';
+import Kennzahlen from '../components/Kennzahlen';
+import Kostenrechnung from '../components/Kostenrechnung';
 
 export default function Start() {
   useSeo(seo.start);
@@ -52,7 +56,7 @@ export default function Start() {
             <h1 className="h1 mt-5">{hero.h1}</h1>
             <p className="fliess mt-6 text-grau">{hero.unterzeile}</p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link to={hero.ctaPrimaer.ziel} className="btn-primaer">
                 {hero.ctaPrimaer.text}
               </Link>
@@ -60,6 +64,12 @@ export default function Start() {
                 {hero.ctaSekundaer.text}
               </Link>
             </div>
+
+            {/* Preis nicht verstecken: Wer ihn sucht und nicht findet, fragt nicht nach. */}
+            <p className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span className="font-mono text-xl text-offwhite">{hero.preisanker.ab}</span>
+              <span className="text-sm text-grau">{hero.preisanker.zusatz}</span>
+            </p>
 
             <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6 text-sm text-grau">
               {hero.vertrauenszeile.map((punkt) => (
@@ -75,15 +85,19 @@ export default function Start() {
             <Schleife />
           </div>
         </div>
+
+        <div className="huelle mt-16 sm:mt-20">
+          <Kennzahlen />
+        </div>
       </section>
 
       {/* ---------------------------------------------- Problem */}
       <Abschnitt>
-        <h2 className="h2 max-w-[18ch]">{problem.h2}</h2>
+        <Titel className="h2 max-w-[18ch]">{problem.h2}</Titel>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {problem.punkte.map((punkt, i) => (
             <Reveal key={punkt.titel} verzoegerung={i * 70} className="h-full">
-              <article className="karte flex h-full flex-col p-6 sm:p-7">
+              <article className="karte karte-heben flex h-full flex-col p-6 sm:p-7">
                 <span
                   aria-hidden="true"
                   className="mb-6 block h-24 w-[54px] rounded border border-grau/25 bg-offwhite"
@@ -103,7 +117,10 @@ export default function Start() {
       {/* ---------------------------------------------- So funktioniert's */}
       <Abschnitt dunkel id="ablauf">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-          <h2 className="h2">{ablauf.h2}</h2>
+          <div>
+            <Titel className="h2">{ablauf.h2}</Titel>
+            <p className="fliess mt-4 text-grau">{ablauf.unterzeile}</p>
+          </div>
           <Link to="/so-funktionierts" className="btn-sekundaer-dunkel">
             Ausführlich ansehen
           </Link>
@@ -115,7 +132,7 @@ export default function Start() {
       <Abschnitt>
         <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-16">
           <div>
-            <h2 className="h2">{kreativ.h2}</h2>
+            <Titel className="h2">{kreativ.h2}</Titel>
             <p className="fliess mt-6 text-grau-stark">{kreativ.text}</p>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {zusagen.map((zusage) => (
@@ -129,7 +146,7 @@ export default function Start() {
               ))}
             </ul>
           </div>
-          <Reveal>
+          <Reveal richtung="rechts">
             <Schleife hell />
           </Reveal>
         </div>
@@ -137,9 +154,9 @@ export default function Start() {
 
       {/* ---------------------------------------------- So sieht es aus */}
       <Abschnitt dunkel id="so-sieht-es-aus">
-        <h2 className="h2 max-w-[20ch]">{schaufenster.h2}</h2>
+        <Titel className="h2 max-w-[20ch]">{schaufenster.h2}</Titel>
 
-        <Reveal className="mt-10">
+        <Reveal richtung="zoom" className="mt-10">
           <Schaufenster />
         </Reveal>
 
@@ -157,9 +174,33 @@ export default function Start() {
 
       {/* ---------------------------------------------- Pakete */}
       <Abschnitt id="pakete">
-        <h2 className="h2">{paketeAbschnitt.h2}</h2>
-        <div className="mt-10">
+        <Titel className="h2">{paketeAbschnitt.h2}</Titel>
+
+        {/* Bedenken zuerst ausräumen, dann Preise zeigen */}
+        <div className="mt-8">
+          <Sicherheiten />
+        </div>
+
+        <div className="mt-12">
           <Pakete />
+        </div>
+
+        <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.3fr] lg:items-start">
+          <Reveal richtung="links">
+            <Kostenrechnung />
+          </Reveal>
+          <Reveal richtung="rechts" className="lg:pt-2">
+            <div className="rounded-lg border border-dashed border-grau/40 p-6">
+              <h3 className="h3">Noch unsicher, welches Paket?</h3>
+              <p className="fliess mt-3 text-grau-stark">
+                Dann schreib mir kurz, was du bewerben willst — ich sage dir ehrlich, welches
+                Paket passt. Auch wenn das BASIS ist.
+              </p>
+              <Link to="/kampagne-starten" className="btn-primaer mt-6">
+                Unverbindlich anfragen
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </Abschnitt>
 
@@ -167,7 +208,7 @@ export default function Start() {
       <Abschnitt dunkel id="standorte">
         <div className="grid gap-10 lg:grid-cols-[1fr_360px] lg:items-start lg:gap-16">
           <div>
-            <h2 className="h2">{standorteAbschnitt.h2}</h2>
+            <Titel className="h2">{standorteAbschnitt.h2}</Titel>
             <p className="fliess mt-6 text-grau">{standortHinweis}</p>
             <dl className="mt-8 grid max-w-md gap-4 border-t border-white/10 pt-6 sm:grid-cols-2">
               <div>
@@ -182,7 +223,7 @@ export default function Start() {
               </div>
             </dl>
           </div>
-          <Reveal className="flex justify-center lg:justify-end">
+          <Reveal richtung="rechts" className="flex justify-center lg:justify-end">
             {standorte.map((standort) => (
               <Standortkarte key={standort.id} standort={standort} />
             ))}
@@ -192,9 +233,9 @@ export default function Start() {
 
       {/* ---------------------------------------------- Was ich verspreche */}
       <Abschnitt id="versprechen">
-        <h2 className="h2 max-w-[20ch]">{startseite.versprechen.h2}</h2>
+        <Titel className="h2 max-w-[20ch]">{startseite.versprechen.h2}</Titel>
         <div className="mt-10 grid gap-6 lg:grid-cols-2 lg:gap-8">
-          <Reveal>
+          <Reveal richtung="links">
             <div className="karte h-full p-6 sm:p-8">
               <h3 className="h3">{startseite.versprechen.ja.titel}</h3>
               <ul className="mt-6 space-y-3.5">
@@ -207,7 +248,7 @@ export default function Start() {
               </ul>
             </div>
           </Reveal>
-          <Reveal verzoegerung={80}>
+          <Reveal richtung="rechts" verzoegerung={80}>
             <div className="h-full rounded-lg border border-dashed border-grau/40 p-6 sm:p-8">
               <h3 className="h3 text-grau-stark">{startseite.versprechen.nein.titel}</h3>
               <ul className="mt-6 space-y-4">
@@ -241,7 +282,7 @@ export default function Start() {
             </div>
           </div>
           <div>
-            <h2 className="h2">{startseite.person.h2}</h2>
+            <Titel className="h2">{startseite.person.h2}</Titel>
             <p className="fliess mt-6 text-grau-stark">{startseite.person.text}</p>
             <Link to="/kontakt" className="btn-sekundaer-hell mt-8">
               Direkt Kontakt aufnehmen
@@ -257,7 +298,7 @@ export default function Start() {
       <Abschnitt dunkel id="standortpartner">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-16">
           <div>
-            <h2 className="h2">{startseite.partner.h2}</h2>
+            <Titel className="h2">{startseite.partner.h2}</Titel>
             <p className="fliess mt-6 text-grau">{startseite.partner.text}</p>
             <Link to={startseite.partner.cta.ziel} className="btn-primaer mt-8">
               {startseite.partner.cta.text}
@@ -283,17 +324,36 @@ export default function Start() {
 
       {/* ---------------------------------------------- FAQ */}
       <Abschnitt id="faq">
-        <h2 className="h2 mb-10 text-center">{startseite.faqAbschnitt.h2}</h2>
+        <div className="mb-10 text-center">
+          <Titel className="h2">{startseite.faqAbschnitt.h2}</Titel>
+          <p className="mx-auto mt-4 max-w-lesbar text-grau-stark">
+            {startseite.faqAbschnitt.unterzeile}
+          </p>
+        </div>
         <Faq />
+
+        <Reveal className="mx-auto mt-10 max-w-3xl">
+          <div className="karte flex flex-col items-start gap-5 p-6 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 className="h3">{startseite.faqAbschnitt.abschlussTitel}</h3>
+              <p className="mt-2 max-w-lesbar text-[0.95rem] leading-relaxed text-grau-stark">
+                {startseite.faqAbschnitt.abschlussText}
+              </p>
+            </div>
+            <Link to="/kontakt" className="btn-primaer shrink-0">
+              Frage stellen
+            </Link>
+          </div>
+        </Reveal>
       </Abschnitt>
 
       {/* ---------------------------------------------- Abschluss */}
       <Abschnitt dunkel>
-        <h2 className="h2 text-center">{startseite.abschluss.h2}</h2>
+        <Titel className="h2 text-center">{startseite.abschluss.h2}</Titel>
         <div className="mx-auto mt-10 grid max-w-4xl gap-5 md:grid-cols-2">
           {startseite.abschluss.karten.map((karte, i) => (
             <Reveal key={karte.titel} verzoegerung={i * 80} className="h-full">
-              <article className="karte-dunkel flex h-full flex-col p-7">
+              <article className="karte-dunkel karte-heben flex h-full flex-col p-7">
                 <h3 className="font-display text-xl font-bold">{karte.titel}</h3>
                 <p className="mt-3 flex-1 text-[0.975rem] leading-relaxed text-grau">{karte.text}</p>
                 <Link
