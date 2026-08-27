@@ -74,7 +74,27 @@ function QrFlaeche({ farbe, hintergrund }: { farbe: string; hintergrund: string 
 }
 
 export default function Motiv({ motiv }: { motiv: Beispielmotiv }) {
-  const f = farben[motiv.variante];
+  /* Fertiges Motiv als Bilddatei */
+  if (motiv.bild) {
+    return (
+      <img
+        src={motiv.bild.pfad}
+        alt={motiv.bild.alt}
+        width={720}
+        height={1280}
+        loading="lazy"
+        decoding="async"
+        className="hochformat w-full rounded-lg object-cover"
+        style={{
+          boxShadow: '0 18px 44px -22px rgba(20,22,26,0.55)',
+          outline: '1px solid rgba(138,144,153,0.28)',
+          outlineOffset: '-1px',
+        }}
+      />
+    );
+  }
+
+  const f = farben[motiv.variante ?? 'dunkel'];
 
   return (
     <div
@@ -148,7 +168,7 @@ export default function Motiv({ motiv }: { motiv: Beispielmotiv }) {
 
         {/* Details */}
         <ul style={{ marginTop: '6cqi', display: 'grid', gap: '2.4cqi' }}>
-          {motiv.details.map((zeile) => (
+          {(motiv.details ?? []).map((zeile) => (
             <li
               key={zeile}
               className="flex items-start"

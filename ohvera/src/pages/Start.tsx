@@ -19,7 +19,7 @@ import Faq from '../components/Faq';
 import Haken from '../components/Haken';
 import Icon, { type IconName } from '../components/Icon';
 import Kennzahlen from '../components/Kennzahlen';
-import Motivgalerie from '../components/Motivgalerie';
+import Motivkarussell from '../components/Motivkarussell';
 import Pakete from '../components/Pakete';
 import Referenzen from '../components/Referenzen';
 import Reveal from '../components/Reveal';
@@ -156,7 +156,7 @@ export default function Start() {
           <h3 className="font-display text-2xl font-bold sm:text-3xl">{schaufenster.motiveTitel}</h3>
           <p className="fliess mt-3 text-grau-stark">{schaufenster.motiveText}</p>
           <div className="mt-8">
-            <Motivgalerie />
+            <Motivkarussell />
           </div>
           <p className="mt-8 flex items-center gap-2.5 border-t pt-6 text-lg font-medium trennlinie">
             <Icon name="stift" groesse={22} className="text-elektroblau" />

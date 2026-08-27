@@ -16,7 +16,7 @@ import Abschnitt from '../components/Abschnitt';
 import Faq from '../components/Faq';
 import Haken from '../components/Haken';
 import Icon from '../components/Icon';
-import Motivgalerie from '../components/Motivgalerie';
+import Motivkarussell from '../components/Motivkarussell';
 import Pakete from '../components/Pakete';
 import Reveal from '../components/Reveal';
 import Schleife from '../components/Schleife';
@@ -77,7 +77,7 @@ export default function Werben() {
             <p className="fliess mt-6 text-grau">{startseite.kreativ.text}</p>
           </div>
           <Reveal richtung="rechts">
-            <Motivgalerie />
+            <Motivkarussell hell={false} />
           </Reveal>
         </div>
       </Abschnitt>

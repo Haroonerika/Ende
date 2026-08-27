@@ -47,7 +47,7 @@ function useSchmalerSchirm(): boolean {
 
 export default function Schaufenster() {
   const slot = useAktiverSlot();
-  const motive = beispielmotive.slice(0, 3);
+  const motive = beispielmotive.filter((motiv) => !motiv.bild).slice(0, 3);
   const aktiv = slot % motive.length;
   const ansicht = useSchmalerSchirm() ? ansichtNah : ansichtWeit;
 

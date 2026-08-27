@@ -515,9 +515,9 @@ export const startseite = {
   schaufenster: {
     h2: 'So sieht deine Werbung im Schaufenster aus.',
     bildunterschrift: 'Zeichnung, kein Foto — so hängt der Bildschirm im Schaufenster.',
-    motiveTitel: 'Die Motive einzeln',
+    motiveTitel: 'So sehen fertige Motive aus',
     motiveText:
-      'Vier Beispiele im Format Hochformat — so groß, dass man sie aus einigen Metern Entfernung noch lesen kann.',
+      'Angebot, Saisonaktion, Termin, offene Stelle — alles im Hochformat und aus einigen Metern Entfernung lesbar. Was du davon brauchst, sagst du uns; gestaltet wird es hier.',
     abschlusssatz: 'So ein Motiv erstellen wir für dich — in jedem Paket enthalten.',
     kennzeichnung: 'Beispielgestaltung',
   },
@@ -627,21 +627,67 @@ export const startseite = {
 
 export type Beispielmotiv = {
   id: string;
-  /** Steuert das Layout der Motivkarte: dunkel, hell oder blau */
-  variante: 'dunkel' | 'hell' | 'blau';
   branche: string;
+  /**
+   * Fertiges Motiv als Bilddatei in public/motive/.
+   * Ist es gesetzt, wird das Bild gezeigt und alle folgenden Felder
+   * werden nicht gebraucht.
+   */
+  bild?: { pfad: string; alt: string };
+  /** Ab hier: Felder der gezeichneten Motive (ohne Bilddatei) */
+  variante?: 'dunkel' | 'hell' | 'blau';
   /** Neutrale Bezeichnung in der Logo-Fläche — nie ein echter Firmenname */
-  logoWort: string;
-  kicker: string;
-  headline: string;
-  angebot: string;
-  details: string[];
-  kontaktzeile: string;
+  logoWort?: string;
+  kicker?: string;
+  headline?: string;
+  angebot?: string;
+  details?: string[];
+  kontaktzeile?: string;
   /** Fläche für QR-Code oder Kontaktangabe */
-  aktion: string;
+  aktion?: string;
 };
 
 export const beispielmotive: Beispielmotiv[] = [
+  {
+    id: 'elektro',
+    branche: 'Elektrobetrieb · Stellenanzeige',
+    bild: {
+      pfad: '/motive/elektro.webp',
+      alt: 'Werbemotiv eines Elektrobetriebs: Ein Monteur vor einem Schaltschrank, Überschrift „Strom im Blut? Komm ins Team.", gesuchte Stelle Elektroniker, Vorteile Vier-Tage-Woche, Firmenwagen und 30 Tage Urlaub, dazu ein QR-Code zur Bewerbung.',
+    },
+  },
+  {
+    id: 'solar',
+    branche: 'Solarbetrieb · Angebot mit Preis',
+    bild: {
+      pfad: '/motive/solar.webp',
+      alt: 'Werbemotiv eines Solarbetriebs: Einfamilienhaus mit Photovoltaikanlage, Überschrift „Dein Dach. Dein Strom. Deine Zukunft.", Solarpaket mit Speicher zum Festpreis inklusive Montage und ein QR-Code für einen kostenlosen Solarcheck.',
+    },
+  },
+  {
+    id: 'reisen',
+    branche: 'Reisebüro · mehrere Angebote',
+    bild: {
+      pfad: '/motive/reisen.webp',
+      alt: 'Werbemotiv eines Reisebüros: Überschrift „Raus aus dem Alltag. Rein in die Sonne.", drei Reiseangebote als Postkarten mit Preisen und ein QR-Code, um alle Angebote anzusehen.',
+    },
+  },
+  {
+    id: 'zahnarzt',
+    branche: 'Zahnarztpraxis · Terminaktion',
+    bild: {
+      pfad: '/motive/zahnarzt.webp',
+      alt: 'Werbemotiv einer Zahnarztpraxis: Lächelnde Patientin mit Smartphone, Überschrift „Dein Lächeln. Dein Moment.", professionelle Zahnreinigung zum Festpreis und ein QR-Code zur Terminbuchung.',
+    },
+  },
+  {
+    id: 'kfz',
+    branche: 'Kfz-Versicherung · Tarifwerbung',
+    bild: {
+      pfad: '/motive/kfz.webp',
+      alt: 'Werbemotiv einer Kfz-Versicherung: Auto auf einer Landstraße in einer Schutzhülle, Überschrift „Fahren. Nicht sorgen.", Rundum-Tarif ab einem Monatsbetrag mit Haftpflicht, Teilkasko und Schutzbrief sowie ein QR-Code zum Beitragsrechner.',
+    },
+  },
   {
     id: 'handwerk',
     variante: 'dunkel',

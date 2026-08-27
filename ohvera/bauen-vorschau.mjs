@@ -14,7 +14,16 @@ const cssDatei = dateien.find((n) => n.endsWith('.css'));
 const jsDatei = dateien.find((n) => n.endsWith('.js'));
 
 let css = readFileSync(join(assets, cssDatei), 'utf8');
-const js = readFileSync(join(assets, jsDatei), 'utf8');
+let js = readFileSync(join(assets, jsDatei), 'utf8');
+
+/* Bilder aus public/ liegen in der Vorschau nicht auf einem Server —
+   deshalb werden sie direkt in die Datei eingebettet. */
+let bilder = 0;
+js = js.replace(/["']\/motive\/([\w-]+\.webp)["']/g, (_treffer, datei) => {
+  const daten = readFileSync(join(dist, 'motive', datei)).toString('base64');
+  bilder += 1;
+  return `"data:image/webp;base64,${daten}"`;
+});
 
 /* Schriften: nur die lateinischen Schnitte einbetten, den Rest verwerfen.
    Kyrillisch, Griechisch und Vietnamesisch braucht diese Seite nicht. */
@@ -60,5 +69,5 @@ const seite = `<title>${titel}</title>
 
 writeFileSync(process.argv[2] ?? 'vorschau.html', seite);
 console.log(
-  `Schriften eingebettet: ${behalten}, verworfen: ${verworfen} · Datei: ${(seite.length / 1024 / 1024).toFixed(2)} MB`,
+  `Schriften: ${behalten} eingebettet, ${verworfen} verworfen · Bilder: ${bilder} · Datei: ${(seite.length / 1024 / 1024).toFixed(2)} MB`,
 );
