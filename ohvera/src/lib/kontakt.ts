@@ -34,7 +34,7 @@ export function kontaktwege(): Kontaktweg[] {
       bezeichnung: 'Telefon',
       wert: kontakt.telefon,
       ziel: istPlatzhalter(kontakt.telefon) ? null : `tel:${nurZiffern(kontakt.telefon)}`,
-      beschreibung: 'Der schnellste Weg. Wenn ich nicht rangehe, rufe ich zurück.',
+      beschreibung: 'Der schnellste Weg. Geht gerade niemand ran, rufen wir zurück.',
       offen: istPlatzhalter(kontakt.telefon),
     },
   ];
@@ -46,7 +46,7 @@ export function kontaktwege(): Kontaktweg[] {
       bezeichnung: 'WhatsApp',
       wert: kontakt.whatsappNummer,
       ziel: offen ? null : `https://wa.me/${nurZiffern(kontakt.whatsappNummer)}`,
-      beschreibung: 'Logo und Fotos schickst du am einfachsten hierüber.',
+      beschreibung: 'Logo und Fotos schickst du uns am einfachsten hierüber.',
       offen,
     });
   }

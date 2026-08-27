@@ -54,7 +54,7 @@ export default function Footer() {
                   )}
                 </li>
               ))}
-              <li className="text-grau">Ansprechpartner: {marke.inhaber}</li>
+              <li className="text-grau">Gründer: {marke.inhaber}</li>
             </ul>
           </div>
         </div>

@@ -48,6 +48,10 @@ hochgeladene Fotos **nicht öffentlich abrufbar** sind.
 Kein Stockfoto und keine KI-Person als Übergangslösung. Solange kein Foto da
 ist, zeigt die Seite eine leere, beschriftete Fläche.
 
+Das Team steht bewusst nur mit Rollen auf der Seite („zwei in der Gestaltung,
+zwei im Vertrieb"). Namen oder Fotos der drei anderen kommen erst dazu, wenn
+sie ausdrücklich zugestimmt haben — dann in `startseite.person.rollen`.
+
 ## 4 · Impressum  (`src/content/site.ts`, Abschnitt 17)
 
 Rechtsform ist eingetragen: Einzelunternehmen, kein Registereintrag,

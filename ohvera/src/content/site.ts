@@ -11,6 +11,13 @@
    3. Fehlende Daten bleiben als Platzhalter in eckigen Klammern
       stehen, z. B. [TELEFONNUMMER EINTRAGEN]. Nichts erfinden.
       Offene Platzhalter sind zusätzlich in TODO.md gesammelt.
+   4. Tonfall: OHVERA spricht von sich als „wir" — vier Menschen,
+      zwei in der Gestaltung, zwei im Vertrieb. Den Kunden duzen wir,
+      in Rechtstexten und Formularen siezen wir. In Impressum und
+      Datenschutz bleibt die Ich-Form stehen: Diensteanbieter und
+      Verantwortlicher ist rechtlich eine einzelne Person.
+   5. Namen nennen wir nur von Menschen, die zugestimmt haben. Alle
+      anderen erscheinen ausschließlich mit ihrer Rolle.
    ================================================================== */
 
 /* ------------------------------------------------------------------
@@ -44,7 +51,7 @@ export const kontakt = {
   ansprechpartner: 'Haroon Mishkoo',
   /** WhatsApp ist bewusst ein gleichwertiger Kontaktweg – die Zielgruppe nutzt ihn täglich. */
   whatsappAktiv: true,
-  antwortzeit: 'Ich antworte in der Regel am selben oder am nächsten Tag.',
+  antwortzeit: 'Wir antworten in der Regel am selben oder am nächsten Tag.',
 } as const;
 
 /** Erkennt einen noch nicht ausgefüllten Platzhalter wie [E-MAIL EINTRAGEN]. */
@@ -237,7 +244,7 @@ export const sicherheiten = [
   },
   {
     titel: 'Kein Werbematerial nötig',
-    text: 'Logo, ein Foto, ein Satz — den Rest gestalte ich. In jedem Paket enthalten.',
+    text: 'Logo, ein Foto, ein Satz — den Rest gestalten wir. In jedem Paket enthalten.',
   },
   {
     titel: 'Die Motive gehören dir',
@@ -398,7 +405,7 @@ export const startseite = {
   aufEinenBlick: {
     titel: 'Was du buchst, in Zahlen',
     hinweis:
-      'Das sind Angaben zur Technik und zur Schleife — keine Reichweite. Wie viele Menschen vorbeigehen, messe ich nicht.',
+      'Das sind Angaben zur Technik und zur Schleife — keine Reichweite. Wie viele Menschen vorbeigehen, messen wir nicht.',
     zahlen: [
       { wert: 10, einheit: 'Sekunden', bezeichnung: 'läuft dein Spot je Durchlauf' },
       { wert: ausspielungenProTag, einheit: 'Mal am Tag', bezeichnung: 'wird er ausgespielt' },
@@ -440,7 +447,7 @@ export const startseite = {
       },
       {
         marke: 'Wenige Tage später',
-        titel: 'Ich gestalte dein Motiv.',
+        titel: 'Wir gestalten dein Motiv.',
         text: 'Fertig in wenigen Tagen, eine Korrekturrunde inklusive.',
       },
       {
@@ -458,8 +465,8 @@ export const startseite = {
 
   /* 9.4 Kreativservice ------------------------------------------- */
   kreativ: {
-    h2: 'Die Werbung mache ich.',
-    text: 'Die meisten kleinen Betriebe haben keine Designabteilung und keine Zeit, sich eine zu suchen. Deshalb ist die Gestaltung in jedem Paket enthalten — nicht als Aufpreis. Du schickst mir Logo, ein Foto und dein Angebot, den Rest übernehme ich. Das fertige Motiv gehört dir und darfst du überall weiterverwenden: Instagram, dein eigenes Schaufenster, WhatsApp-Status.',
+    h2: 'Die Werbung machen wir.',
+    text: 'Die meisten kleinen Betriebe haben keine Designabteilung und keine Zeit, sich eine zu suchen. Deshalb ist die Gestaltung in jedem Paket enthalten — nicht als Aufpreis. Zwei Designer arbeiten bei uns an nichts anderem. Du schickst uns Logo, ein Foto und dein Angebot, den Rest übernehmen wir. Das fertige Motiv gehört dir und darfst du überall weiterverwenden: Instagram, dein eigenes Schaufenster, WhatsApp-Status.',
   },
 
   /* 9.4b So sieht es aus ----------------------------------------- */
@@ -469,7 +476,7 @@ export const startseite = {
     motiveTitel: 'Die Motive einzeln',
     motiveText:
       'Vier Beispiele im Format Hochformat — so groß, dass man sie aus einigen Metern Entfernung noch lesen kann.',
-    abschlusssatz: 'So ein Motiv erstelle ich für dich — in jedem Paket enthalten.',
+    abschlusssatz: 'So ein Motiv erstellen wir für dich — in jedem Paket enthalten.',
     kennzeichnung: 'Beispielgestaltung',
   },
 
@@ -485,53 +492,69 @@ export const startseite = {
 
   /* 9.7 Warum OHVERA --------------------------------------------- */
   versprechen: {
-    h2: 'Was ich verspreche — und was nicht.',
+    h2: 'Was wir versprechen — und was nicht.',
     ja: {
       titel: 'Das bekommst du:',
       punkte: [
         'Einen echten, benannten Standort',
         'Eine feste Ausspielfrequenz, die du nachrechnen kannst',
-        'Gestaltung durch mich, in jedem Paket',
+        'Gestaltung durch unsere Designer, in jedem Paket',
         'Ein Ausspielprotokoll am Monatsende',
         'Tagesgenaue Verlängerung bei Ausfall',
-        'Einen Ansprechpartner, den du persönlich erreichst',
+        'Einen festen Ansprechpartner, den du persönlich erreichst',
       ],
     },
     nein: {
-      titel: 'Das verspreche ich nicht:',
+      titel: 'Das versprechen wir nicht:',
       punkte: [
-        'Keine Reichweitenzahlen. Ich messe nicht, wie viele Menschen vorbeigehen — also behaupte ich es auch nicht.',
-        'Keine Umsatzversprechen. Was Werbung dir bringt, weiß ich nicht.',
+        'Keine Reichweitenzahlen. Wir messen nicht, wie viele Menschen vorbeigehen — also behaupten wir es auch nicht.',
+        'Keine Umsatzversprechen. Was Werbung dir bringt, wissen wir nicht.',
         'Keine erfundenen Kunden oder Bewertungen.',
         'Keine Standorte, die es nicht gibt.',
       ],
     },
   },
 
-  /* 9.7b Wer dahintersteht --------------------------------------- */
+  /* 9.7b Wer dahintersteht ---------------------------------------
+     Ersetzt das, was auf anderen Websites die Kundenlogos wären.
+     Bewusst nur Rollen — keine erfundenen Namen, keine erfundenen
+     Lebensläufe. Wer namentlich genannt wird, hat dem zugestimmt. */
   person: {
-    h2: 'Hinter OHVERA steht eine Person.',
-    text: 'Mein Name ist Haroon Mishkoo. Ich arbeite als Friseur in Haren und kenne die Betriebe hier persönlich. OHVERA startet mit einem Bildschirm, nicht mit einem Netzwerk — weil ich es erst beweisen will, bevor ich es verkaufe. Wenn etwas nicht läuft, rufst du keine Hotline an. Du rufst mich an.',
+    h2: 'Hinter OHVERA stehen vier Menschen.',
+    text: 'Zwei von uns gestalten, zwei sind im Vertrieb unterwegs. Gegründet hat OHVERA Haroon Mishkoo — er arbeitet als Friseur in Haren und kennt die Betriebe hier persönlich. Wir starten mit einem Bildschirm, nicht mit einem Netzwerk, weil wir es erst beweisen wollen, bevor wir es verkaufen. Wenn etwas nicht läuft, rufst du keine Hotline an. Du rufst deinen Ansprechpartner an.',
+    rollen: [
+      {
+        anzahl: '2',
+        titel: 'Gestaltung',
+        text: 'Zwei Designer machen nichts anderes als die Werbemotive. Deshalb ist Gestaltung bei uns kein Aufpreis, sondern der Kern des Angebots.',
+      },
+      {
+        anzahl: '2',
+        titel: 'Vor Ort',
+        text: 'Zwei sind im Vertrieb unterwegs, sprechen mit Betrieben und schauen sich Schaufenster an. Wer bucht, bekommt einen festen Ansprechpartner aus diesem Team.',
+      },
+    ],
     /* Kein Stockfoto und keine KI-Person als Übergangslösung.
        Solange hier ein Platzhalter steht, zeigt die Seite eine leere Fläche. */
     fotoPlatzhalter: '[FOTO HAROON EINFÜGEN]',
+    fotoUnterschrift: 'Haroon Mishkoo, Gründer',
     fotoPfad: '',
   },
 
   /* 9.8 Standortpartner ------------------------------------------ */
   partner: {
-    h2: 'Du hast ein Schaufenster. Ich habe den Bildschirm.',
-    text: 'Ich installiere und betreibe den Bildschirm auf eigene Kosten und kümmere mich um Technik, Inhalte und Vermarktung. Du stellst die Fläche und den Strom. Dafür bekommst du einen eigenen festen Werbeplatz in der Schleife — dauerhaft und kostenlos.',
+    h2: 'Du hast ein Schaufenster. Wir haben den Bildschirm.',
+    text: 'Wir installieren und betreiben den Bildschirm auf eigene Kosten und kümmern uns um Technik, Inhalte und Vermarktung. Du stellst die Fläche und den Strom. Dafür bekommst du einen eigenen festen Werbeplatz in der Schleife — dauerhaft und kostenlos.',
     cta: { text: 'Standortpartner werden', ziel: '/standortpartner' },
   },
 
   /* 9.9 FAQ-Überschrift ------------------------------------------ */
   faqAbschnitt: {
-    h2: 'Fragen, die mir gestellt werden.',
+    h2: 'Fragen, die uns gestellt werden.',
     unterzeile: 'Alles, was Kunden vor der ersten Buchung wissen wollen.',
     abschlussTitel: 'Deine Frage ist nicht dabei?',
     abschlussText:
-      'Dann schreib sie mir. Es gibt keine Hotline und kein Ticketsystem — die Antwort kommt von mir persönlich, meistens noch am selben Tag.',
+      'Dann schreib sie uns. Es gibt keine Hotline und kein Ticketsystem — du bekommst die Antwort von deinem Ansprechpartner, meistens noch am selben Tag.',
   },
 
   /* 9.10 Abschluss ----------------------------------------------- */
@@ -540,12 +563,12 @@ export const startseite = {
     karten: [
       {
         titel: 'Ich möchte werben',
-        text: 'Du hast einen Betrieb und willst vor Ort sichtbar sein. Fünf kurze Fragen, dann melde ich mich.',
+        text: 'Du hast einen Betrieb und willst vor Ort sichtbar sein. Fünf kurze Fragen, dann melden wir uns.',
         cta: { text: 'Kampagne starten', ziel: '/kampagne-starten' },
       },
       {
         titel: 'Ich habe eine Fläche',
-        text: 'Du hast ein Schaufenster in Haren, Meppen oder Lingen. Ich schaue mir die Fläche an.',
+        text: 'Du hast ein Schaufenster in Haren, Meppen oder Lingen. Wir schauen sie uns an.',
         cta: { text: 'Standortpartner werden', ziel: '/standortpartner' },
       },
     ],
@@ -634,7 +657,7 @@ export const beispielmotive: Beispielmotiv[] = [
 export const faq: { frage: string; antwort: string }[] = [
   {
     frage: 'Wie viele Menschen sehen meine Werbung?',
-    antwort: `Das kann ich dir nicht sagen, weil ich es nicht messe — und wer dir eine Zahl nennt, hat sie meistens auch nicht gemessen. Was feststeht: Dein Spot läuft ${ausspielungenProTag} Mal am Tag, ${produkt.betriebStunden} Stunden lang, an einem Schaufenster in der Innenstadt. Wie viel dort los ist, kannst du als Ortskundiger besser einschätzen als jede Statistik.`,
+    antwort: `Das können wir dir nicht sagen, weil wir es nicht messen — und wer dir eine Zahl nennt, hat sie meistens auch nicht gemessen. Was feststeht: Dein Spot läuft ${ausspielungenProTag} Mal am Tag, ${produkt.betriebStunden} Stunden lang, an einem Schaufenster in der Innenstadt. Wie viel dort los ist, kannst du als Ortskundiger besser einschätzen als jede Statistik.`,
   },
   {
     frage: 'Was kostet eine Kampagne?',
@@ -644,12 +667,12 @@ export const faq: { frage: string; antwort: string }[] = [
   {
     frage: 'Wie lange bin ich gebunden?',
     antwort:
-      'Nicht länger als einen Monat. Alle drei Pakete laufen monatlich und sind zum Monatsende kündbar — keine Mindestlaufzeit, keine Jahresbindung. Auch bei PLUS und PRO nicht, obwohl ich dafür mehrere Motive gestalte.',
+      'Nicht länger als einen Monat. Alle drei Pakete laufen monatlich und sind zum Monatsende kündbar — keine Mindestlaufzeit, keine Jahresbindung. Auch bei PLUS und PRO nicht, obwohl wir dafür mehrere Motive gestalten.',
   },
   {
     frage: 'Ich habe kein Werbematerial. Geht das trotzdem?',
     antwort:
-      'Ja, das ist der Normalfall. Gestaltung ist in jedem Paket enthalten. Ich brauche dein Logo, ein bis zwei gute Fotos und einen Satz, was beworben werden soll.',
+      'Ja, das ist der Normalfall. Gestaltung ist in jedem Paket enthalten. Wir brauchen dein Logo, ein bis zwei gute Fotos und einen Satz, was beworben werden soll.',
   },
   {
     frage: 'Kann ich das Motiv während der Laufzeit ändern?',
@@ -669,7 +692,7 @@ export const faq: { frage: string; antwort: string }[] = [
   {
     frage: 'Was heißt Branchenexklusivität?',
     antwort:
-      'Im PRO-Paket sperre ich deine Branche auf dem gebuchten Bildschirm. Solange du buchst, wirbt dort kein zweiter Betrieb aus deinem Bereich. Die Sperre gilt für diesen Bildschirm, nicht für das ganze Netz.',
+      'Im PRO-Paket sperren wir deine Branche auf dem gebuchten Bildschirm. Solange du buchst, wirbt dort kein zweiter Betrieb aus deinem Bereich. Die Sperre gilt für diesen Bildschirm, nicht für das ganze Netz.',
   },
   {
     frage: 'Kann ich die Motive auch woanders verwenden?',
@@ -679,7 +702,7 @@ export const faq: { frage: string; antwort: string }[] = [
   {
     frage: 'Wie werde ich Standortpartner?',
     antwort:
-      'Über das Formular auf der Standortpartner-Seite. Ich schaue mir die Fläche an, und wenn sie passt, halten wir alles schriftlich fest, bevor irgendetwas installiert wird.',
+      'Über das Formular auf der Standortpartner-Seite. Wir schauen uns die Fläche an, und wenn sie passt, halten wir alles schriftlich fest, bevor irgendetwas installiert wird.',
   },
 ];
 
@@ -694,7 +717,7 @@ export const seiteWerben = {
   ablaufTitel: 'Von der Anfrage bis zum ersten Spot',
   vergleichTitel: 'Die Pakete im Vergleich',
   vergleichZeilen: [
-    { merkmal: 'Werbemotive, von mir gestaltet', basis: '1', plus: '3', pro: '5' },
+    { merkmal: 'Werbemotive, von uns gestaltet', basis: '1', plus: '3', pro: '5' },
     { merkmal: 'Motivwechsel', basis: '1× im Monat', plus: 'automatisch in der Schleife', pro: 'wöchentlich auf Zuruf' },
     { merkmal: 'Ausspielungen pro Tag', basis: String(ausspielungenProTag), plus: String(ausspielungenProTag), pro: String(ausspielungenProTag) },
     { merkmal: 'Dateien für Instagram und WhatsApp', basis: '—', plus: 'ja', pro: 'ja' },
@@ -719,9 +742,9 @@ export const seiteStandorte = {
 
 export const seiteStandortpartner = {
   eyebrow: 'Für Standortpartner',
-  h1: 'Du hast ein Schaufenster. Ich habe den Bildschirm.',
+  h1: 'Du hast ein Schaufenster. Wir haben den Bildschirm.',
   einleitung:
-    'Ich installiere und betreibe den Bildschirm auf eigene Kosten und kümmere mich um Technik, Inhalte und Vermarktung. Du stellst die Fläche und den Strom.',
+    'Wir installieren und betreiben den Bildschirm auf eigene Kosten und kümmern uns um Technik, Inhalte und Vermarktung. Du stellst die Fläche und den Strom.',
   gegenleistungTitel: 'Was du bekommst',
   gegenleistung: [
     {
@@ -730,7 +753,7 @@ export const seiteStandortpartner = {
     },
     {
       titel: 'Keine Kosten, kein Aufwand',
-      text: 'Gerät, Montage, Wartung, Inhalte und Vermarktung übernehme ich. Du musst dich um nichts kümmern.',
+      text: 'Gerät, Montage, Wartung, Inhalte und Vermarktung übernehmen wir. Du musst dich um nichts kümmern.',
     },
     {
       titel: 'Ein moderner Blickfang',
@@ -750,14 +773,14 @@ export const seiteStandortpartner = {
   ],
   ablaufTitel: 'Wie es abläuft',
   ablauf: [
-    { titel: 'Du meldest dich', text: 'Über das Formular unten. Fotos vom Fenster helfen mir sehr.' },
-    { titel: 'Ich schaue mir die Fläche an', text: 'Vor Ort, unverbindlich und ohne Verkaufsgespräch.' },
+    { titel: 'Du meldest dich', text: 'Über das Formular unten. Fotos vom Fenster helfen uns sehr.' },
+    { titel: 'Wir schauen uns die Fläche an', text: 'Vor Ort, unverbindlich und ohne Verkaufsgespräch.' },
     { titel: 'Wir halten es schriftlich fest', text: 'Laufzeit, Strom, Kündigung, dein fester Werbeplatz.' },
-    { titel: 'Ich installiere und übernehme den Rest', text: 'Aufbau, Einrichtung, Inhalte und Vermarktung liegen bei mir.' },
+    { titel: 'Wir installieren und übernehmen den Rest', text: 'Aufbau, Einrichtung, Inhalte und Vermarktung liegen bei uns.' },
   ],
   formularTitel: 'Fläche anbieten',
   formularEinleitung:
-    'Je genauer die Angaben, desto besser kann ich einschätzen, ob die Fläche passt. Die Ausrichtung des Fensters ist dabei wichtiger, als sie klingt: Sie entscheidet über die nötige Helligkeit des Geräts.',
+    'Je genauer die Angaben, desto besser können wir einschätzen, ob die Fläche passt. Die Ausrichtung des Fensters ist dabei wichtiger, als sie klingt: Sie entscheidet über die nötige Helligkeit des Geräts.',
 };
 
 export const seiteSoFunktionierts = {
@@ -773,7 +796,7 @@ export const seiteSoFunktionierts = {
     },
     {
       titel: 'Ferngesteuerte Ausspielung',
-      text: 'Die Motive liegen in einem Ausspielsystem. Ich tausche sie aus der Ferne — ohne dass jemand vor Ort etwas tun muss.',
+      text: 'Die Motive liegen in einem Ausspielsystem. Wir tauschen sie aus der Ferne — ohne dass jemand vor Ort etwas tun muss.',
     },
     {
       titel: 'Feste Schleife statt Zufall',
@@ -791,11 +814,11 @@ export const seiteSoFunktionierts = {
 
 export const seiteKontakt = {
   eyebrow: 'Kontakt',
-  h1: 'Du erreichst mich direkt.',
+  h1: 'Du erreichst uns direkt.',
   einleitung:
-    'Keine Hotline, kein Ticketsystem, kein Vertrieb. Wenn du anrufst, gehe ich ran — oder rufe zurück.',
+    'Keine Hotline, kein Ticketsystem, keine Warteschleife. Du hast einen festen Ansprechpartner — und wenn der gerade nicht rangeht, ruft er zurück.',
   wegeTitel: 'Kontaktwege',
-  formularTitel: 'Oder schreib mir hier',
+  formularTitel: 'Oder schreib uns hier',
   formularEinleitung:
     'Für alles, was keine komplette Kampagnenanfrage ist. Für eine Kampagne führt dich das mehrstufige Formular schneller ans Ziel.',
 };
@@ -807,7 +830,7 @@ export const seiteKontakt = {
 
 export const kampagnenformular = {
   eyebrow: 'Kampagne starten',
-  h1: 'Fünf Fragen, dann melde ich mich.',
+  h1: 'Fünf Fragen, dann melden wir uns.',
   einleitung:
     'Das Formular dauert etwa zwei Minuten. Es ist unverbindlich — es entsteht keine Buchung und keine Kostenpflicht.',
   schritte: [
@@ -851,13 +874,13 @@ export const kampagnenformular = {
   kontaktschritt: {
     frage: 'Wie erreiche ich dich?',
     hinweisBranche:
-      'Die Branche brauche ich, um die Branchenexklusivität auf dem Bildschirm zu prüfen.',
+      'Die Branche brauchen wir, um die Branchenexklusivität auf dem Bildschirm zu prüfen.',
   },
   erfolg: {
     h1: 'Angekommen. Danke.',
-    text: 'Deine Anfrage liegt bei mir.',
+    text: 'Deine Anfrage liegt bei uns.',
     schritte: [
-      'Ich melde mich innerhalb von zwei Werktagen — per E-Mail oder Telefon, wie du es angegeben hast.',
+      'Dein Ansprechpartner meldet sich innerhalb von zwei Werktagen — per E-Mail oder Telefon, wie du es angegeben hast.',
       'Wir klären kurz, was beworben werden soll und ob dein Wunschplatz frei ist.',
       'Erst danach entsteht ein Angebot. Mit dieser Anfrage hast du nichts gebucht und nichts bezahlt.',
     ],
@@ -882,11 +905,11 @@ export const partnerformular = {
   jaNein: ['Ja', 'Nein'],
   uploadHinweis: 'Höchstens 3 Dateien, je 5 MB, als JPG, PNG oder HEIC.',
   erfolg: {
-    h1: 'Danke — ich schaue mir die Fläche an.',
-    text: 'Deine Anfrage liegt bei mir.',
+    h1: 'Danke — wir schauen uns die Fläche an.',
+    text: 'Deine Anfrage liegt bei uns.',
     schritte: [
-      'Ich melde mich innerhalb von zwei Werktagen bei dir.',
-      'Wenn die Fläche grundsätzlich passt, komme ich unverbindlich vorbei und schaue sie mir an.',
+      'Wir melden uns innerhalb von zwei Werktagen bei dir.',
+      'Wenn die Fläche grundsätzlich passt, kommen wir unverbindlich vorbei und schauen sie uns an.',
       'Erst wenn alles schriftlich festgehalten ist, wird etwas installiert.',
     ],
   },
@@ -898,9 +921,9 @@ export const partnerformular = {
 export const versandHinweis = {
   titel: 'Fast geschafft — ein Klick fehlt noch.',
   whatsapp:
-    'WhatsApp hat sich mit deiner fertigen Nachricht geöffnet. Bei mir ist sie erst, wenn du dort auf Senden gedrückt hast. Falls sich nichts geöffnet hat, schreib mir einfach direkt.',
+    'WhatsApp hat sich mit deiner fertigen Nachricht geöffnet. Bei uns ist sie erst, wenn du dort auf Senden gedrückt hast. Falls sich nichts geöffnet hat, schreib uns einfach direkt.',
   email:
-    'Dein E-Mail-Programm hat sich mit der fertigen Nachricht geöffnet. Bei mir ist sie erst, wenn du dort auf Senden gedrückt hast. Falls sich nichts geöffnet hat, schreib mir einfach direkt.',
+    'Dein E-Mail-Programm hat sich mit der fertigen Nachricht geöffnet. Bei uns ist sie erst, wenn du dort auf Senden gedrückt hast. Falls sich nichts geöffnet hat, schreib uns einfach direkt.',
 };
 
 /** Grenzwerte für den Foto-Upload — clientseitig geprüft. */
@@ -950,7 +973,7 @@ export const seo: Record<
   standortpartner: {
     titel: 'Standortpartner werden | OHVERA',
     beschreibung:
-      'Du hast ein Schaufenster, ich habe den Bildschirm. Installation und Betrieb auf meine Kosten, ein fester Werbeplatz dauerhaft für dich.',
+      'Du hast ein Schaufenster, wir haben den Bildschirm. Installation und Betrieb auf unsere Kosten, ein fester Werbeplatz dauerhaft für dich.',
     pfad: '/standortpartner',
   },
   soFunktionierts: {
@@ -961,13 +984,13 @@ export const seo: Record<
   kampagneStarten: {
     titel: 'Kampagne starten | OHVERA',
     beschreibung:
-      'Unverbindliche Anfrage in fünf Schritten. Ich melde mich innerhalb von zwei Werktagen.',
+      'Unverbindliche Anfrage in fünf Schritten. Wir melden uns innerhalb von zwei Werktagen.',
     pfad: '/kampagne-starten',
   },
   kontakt: {
     titel: 'Kontakt | OHVERA',
     beschreibung:
-      'Direkter Kontakt zu Haroon Mishkoo — per E-Mail, Telefon, WhatsApp oder Formular.',
+      'Direkter Kontakt zum OHVERA-Team — per E-Mail, Telefon, WhatsApp oder Formular.',
     pfad: '/kontakt',
   },
   impressum: {

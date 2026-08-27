@@ -42,12 +42,12 @@ const BETREFF: Record<LeadTyp, string> = {
 
 const FEHLERTEXTE = {
   'kein-kontakt':
-    'Dieser Weg ist noch nicht eingerichtet — deine Anfrage wurde deshalb nicht abgeschickt. Bitte nutz den anderen Knopf oder melde dich direkt bei mir. Ich lasse das hier bewusst so stehen, statt dir einen Versand vorzuspielen, der nicht stattfindet.',
+    'Dieser Weg ist noch nicht eingerichtet — deine Anfrage wurde deshalb nicht abgeschickt. Bitte nutz den anderen Knopf oder melde dich direkt bei uns. Wir lassen das hier bewusst so stehen, statt dir einen Versand vorzuspielen, der nicht stattfindet.',
   spam: 'Die Anfrage wurde nicht abgeschickt.',
   netzwerk:
-    'Die Verbindung hat nicht geklappt. Bitte prüf deine Internetverbindung und versuch es noch einmal — oder melde dich direkt bei mir.',
+    'Die Verbindung hat nicht geklappt. Bitte prüf deine Internetverbindung und versuch es noch einmal — oder melde dich direkt bei uns.',
   server:
-    'Auf meiner Seite ist etwas schiefgelaufen, deine Anfrage ist nicht angekommen. Bitte versuch es später noch einmal oder melde dich direkt bei mir.',
+    'Auf unserer Seite ist etwas schiefgelaufen, deine Anfrage ist nicht angekommen. Bitte versuch es später noch einmal oder melde dich direkt bei uns.',
 } as const;
 
 const nurZiffern = (wert: string) => wert.replace(/[^\d+]/g, '').replace(/^\+/, '');

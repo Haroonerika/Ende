@@ -13,7 +13,7 @@ export function fehltPflichtfeld(wert: string, was: string): string | undefined 
 }
 
 export function pruefeEmail(wert: string): string | undefined {
-  if (wert.trim() === '') return 'Bitte eine E-Mail-Adresse angeben, damit ich antworten kann.';
+  if (wert.trim() === '') return 'Bitte eine E-Mail-Adresse angeben, damit wir antworten können.';
   // Bewusst tolerant: nur offensichtlich unbrauchbare Eingaben abweisen.
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(wert.trim())) {
     return 'Diese E-Mail-Adresse sieht unvollständig aus. Beispiel: name@betrieb.de';

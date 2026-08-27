@@ -22,10 +22,10 @@ export default function Danke() {
         ? kampagnenformular.erfolg
         : {
             h1: 'Danke für deine Nachricht.',
-            text: 'Deine Nachricht liegt bei mir.',
+            text: 'Deine Nachricht liegt bei uns.',
             schritte: [
-              'Ich melde mich innerhalb von zwei Werktagen bei dir.',
-              'Wenn es eilig ist, ruf mich einfach an — das geht schneller.',
+              'Wir melden uns innerhalb von zwei Werktagen bei dir.',
+              'Wenn es eilig ist, ruf einfach an — das geht schneller.',
             ],
           };
 

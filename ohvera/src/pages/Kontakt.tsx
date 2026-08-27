@@ -100,7 +100,8 @@ export default function Kontakt() {
           ))}
         </div>
         <p className="mt-6 text-sm text-grau-stark">
-          Ansprechpartner: {kontakt.ansprechpartner}. Postanschrift siehe{' '}
+          Wer bucht, bekommt einen festen Ansprechpartner. Gründer: {kontakt.ansprechpartner}.
+          Postanschrift siehe{' '}
           <Link to="/impressum" className="underline">
             Impressum
           </Link>

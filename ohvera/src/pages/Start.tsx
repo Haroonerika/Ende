@@ -193,7 +193,7 @@ export default function Start() {
             <div className="rounded-lg border border-dashed border-grau/40 p-6">
               <h3 className="h3">Noch unsicher, welches Paket?</h3>
               <p className="fliess mt-3 text-grau-stark">
-                Dann schreib mir kurz, was du bewerben willst — ich sage dir ehrlich, welches
+                Dann schreib uns kurz, was du bewerben willst — wir sagen dir ehrlich, welches
                 Paket passt. Auch wenn das BASIS ist.
               </p>
               <Link to="/kampagne-starten" className="btn-primaer mt-6">
@@ -280,10 +280,31 @@ export default function Start() {
                 {startseite.person.fotoPlatzhalter}
               </span>
             </div>
+            <p className="mt-3 text-sm text-grau-stark">{startseite.person.fotoUnterschrift}</p>
           </div>
           <div>
             <Titel className="h2">{startseite.person.h2}</Titel>
             <p className="fliess mt-6 text-grau-stark">{startseite.person.text}</p>
+
+            {/* Rollen statt Namen: Wer namentlich genannt wird, hat zugestimmt. */}
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {startseite.person.rollen.map((rolle, i) => (
+                <Reveal key={rolle.titel} verzoegerung={i * 70} className="h-full">
+                  <div className="karte karte-heben flex h-full gap-4 p-5">
+                    <span className="font-mono text-3xl font-medium tabular-nums text-elektroblau">
+                      {rolle.anzahl}
+                    </span>
+                    <div>
+                      <h3 className="text-[0.975rem] font-semibold">{rolle.titel}</h3>
+                      <p className="mt-1 text-[0.9rem] leading-relaxed text-grau-stark">
+                        {rolle.text}
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
             <Link to="/kontakt" className="btn-sekundaer-hell mt-8">
               Direkt Kontakt aufnehmen
             </Link>

@@ -365,7 +365,7 @@ export default function Standortpartner() {
                 <h3 className="text-[0.975rem] font-semibold">Fotos vom Schaufenster</h3>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-grau-stark">
                   Die schickst du am einfachsten direkt in den Chat, der sich beim Abschicken
-                  öffnet — zwei Bilder von außen und eines von innen reichen mir. Bitte keine
+                  öffnet — zwei Bilder von außen und eines von innen reichen uns. Bitte keine
                   Aufnahmen, auf denen Personen erkennbar sind.
                 </p>
               </div>
@@ -375,7 +375,7 @@ export default function Standortpartner() {
               id="p-nachricht"
               label="Nachricht"
               mehrzeilig
-              hilfstext="Alles, was ich über die Fläche wissen sollte."
+              hilfstext="Alles, was wir über die Fläche wissen sollten."
               wert={daten.nachricht}
               onChange={(wert) => setzeWert('nachricht', wert)}
             />
@@ -418,7 +418,7 @@ export default function Standortpartner() {
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="h2">Lieber erst reden?</h2>
           <p className="fliess mx-auto mt-5 text-grau">
-            Du kannst mich auch einfach anrufen oder anschreiben. Ich erkläre dir in fünf Minuten,
+            Du kannst uns auch einfach anrufen oder anschreiben. Wir erklären dir in fünf Minuten,
             worum es geht.
           </p>
           <Link to="/kontakt" className="btn-sekundaer-dunkel mt-8">
