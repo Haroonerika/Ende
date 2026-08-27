@@ -514,7 +514,7 @@ export const startseite = {
   /* 9.4b So sieht es aus ----------------------------------------- */
   schaufenster: {
     h2: 'So sieht deine Werbung im Schaufenster aus.',
-    bildunterschrift: 'Zeichnung, kein Foto — so hängt der Bildschirm im Schaufenster.',
+    bildunterschrift: 'Die Szene ist gezeichnet, die Motive darin sind echte Gestaltungen.',
     motiveTitel: 'So sehen fertige Motive aus',
     motiveText:
       'Angebot, Saisonaktion, Termin, offene Stelle — alles im Hochformat und aus einigen Metern Entfernung lesbar. Was du davon brauchst, sagst du uns; gestaltet wird es hier.',

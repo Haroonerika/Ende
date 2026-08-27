@@ -277,6 +277,52 @@
     transform: none;
   }
 
+  /* --- Kulisse hinter dem Hero: laufende Silhouetten --- */
+
+  .kulisse-geht {
+    animation-name: kulisse-laufen;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform;
+  }
+
+  .kulisse-geht-links {
+    animation-name: kulisse-laufen-links;
+  }
+
+  .kulisse-wippt {
+    animation: kulisse-wippen 0.72s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center bottom;
+  }
+
+  .kulisse-bein-a,
+  .kulisse-bein-b,
+  .kulisse-arm {
+    transform-box: fill-box;
+    transform-origin: 50% 8%;
+  }
+
+  .kulisse-bein-a {
+    animation: kulisse-schwingen 0.72s ease-in-out infinite;
+  }
+
+  .kulisse-bein-b {
+    animation: kulisse-schwingen 0.72s ease-in-out infinite reverse;
+  }
+
+  .kulisse-arm {
+    animation: kulisse-schwingen-arm 0.72s ease-in-out infinite reverse;
+  }
+
+  .kulisse-schirm {
+    animation: kulisse-leuchten 5.5s ease-in-out infinite;
+  }
+
+  .kulisse-schirm-spaet {
+    animation-delay: 2.4s;
+  }
+
   /* Karten heben sich beim Überfahren leicht an */
   .karte-heben {
     transition: transform 0.25s ease-out, box-shadow 0.25s ease-out,
@@ -313,6 +359,64 @@
   }
 }
 
+@keyframes kulisse-laufen {
+  from {
+    transform: translateX(-140px);
+  }
+  to {
+    transform: translateX(1340px);
+  }
+}
+
+@keyframes kulisse-laufen-links {
+  from {
+    transform: translateX(1340px);
+  }
+  to {
+    transform: translateX(-140px);
+  }
+}
+
+@keyframes kulisse-wippen {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2.5px);
+  }
+}
+
+@keyframes kulisse-schwingen {
+  0%,
+  100% {
+    transform: rotate(17deg);
+  }
+  50% {
+    transform: rotate(-17deg);
+  }
+}
+
+@keyframes kulisse-schwingen-arm {
+  0%,
+  100% {
+    transform: rotate(11deg);
+  }
+  50% {
+    transform: rotate(-11deg);
+  }
+}
+
+@keyframes kulisse-leuchten {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.24;
+  }
+}
+
 /* Bewegung nur, wenn der Nutzer sie nicht abbestellt hat */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -341,5 +445,14 @@
 
   .karte-heben:hover {
     transform: none;
+  }
+
+  /* Die Kulisse steht still — die Figuren bleiben als ruhiges Bild stehen */
+  .kulisse-geht {
+    transform: translateX(420px);
+  }
+
+  .kulisse-geht-links {
+    transform: translateX(900px);
   }
 }

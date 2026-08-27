@@ -19,6 +19,7 @@ import Faq from '../components/Faq';
 import Haken from '../components/Haken';
 import Icon, { type IconName } from '../components/Icon';
 import Kennzahlen from '../components/Kennzahlen';
+import Kulisse from '../components/Kulisse';
 import Motivkarussell from '../components/Motivkarussell';
 import Pakete from '../components/Pakete';
 import Referenzen from '../components/Referenzen';
@@ -47,8 +48,13 @@ export default function Start() {
   return (
     <>
       {/* ============================================ 1 · Hero */}
-      <section className="sektion-dunkel px-5 pb-14 pt-10 sm:px-8 sm:pb-20 sm:pt-16">
-        <div className="huelle grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+      <section className="sektion-dunkel relative overflow-hidden px-5 pb-14 pt-10 sm:px-8 sm:pb-20 sm:pt-16">
+        {/* Ab Tablet läuft die Kulisse als Hintergrund unter dem Hero */}
+        <div className="hidden sm:block">
+          <Kulisse />
+        </div>
+
+        <div className="huelle relative z-10 grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           <div>
             <p className="eyebrow inline-flex items-center gap-2 text-grau">
               <Icon name="standort" groesse={16} className="text-elektroblau" />
@@ -72,7 +78,12 @@ export default function Start() {
               <span className="text-sm text-grau">{hero.preisanker.zusatz}</span>
             </p>
 
-            <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6 text-sm text-grau">
+            {/* Auf dem Smartphone als eigener Streifen, damit sie gleich zu sehen ist */}
+            <div className="mt-8 sm:hidden">
+              <Kulisse alsBand />
+            </div>
+
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6 text-sm text-grau sm:mt-10">
               {hero.vertrauenszeile.map((punkt) => (
                 <li key={punkt} className="flex items-center gap-2">
                   <Haken farbe="#1B57FF" />
@@ -87,7 +98,12 @@ export default function Start() {
           </div>
         </div>
 
-        <div className="huelle mt-14 sm:mt-20">
+      </section>
+
+      {/* Kennzahlen als eigener Streifen — so bleibt im Hero Platz für die
+          laufende Kulisse. */}
+      <section className="sektion-dunkel px-5 pb-16 pt-0 sm:px-8 sm:pb-20">
+        <div className="huelle">
           <Kennzahlen />
         </div>
       </section>
