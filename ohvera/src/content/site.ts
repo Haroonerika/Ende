@@ -689,6 +689,22 @@ export const beispielmotive: Beispielmotiv[] = [
     },
   },
   {
+    id: 'autohaus-fahrzeuge',
+    branche: 'Autohaus · mehrere Fahrzeuge',
+    bild: {
+      pfad: '/motive/autohaus-fahrzeuge.webp',
+      alt: 'Werbemotiv eines Autohauses: Drei Fahrzeuge auf einer beleuchteten Bühne, Überschrift „Dein nächstes Auto. Bereit, wenn du es bist.", je Fahrzeug Baujahr, Kilometerstand, Getriebe und Preis sowie ein QR-Code für alle Fahrzeuge.',
+    },
+  },
+  {
+    id: 'immobilien-objekte',
+    branche: 'Immobilienbüro · vier Objekte',
+    bild: {
+      pfad: '/motive/immobilien-objekte.webp',
+      alt: 'Werbemotiv eines Immobilienbüros: Überschrift „Vier Häuser. Ein neues Kapitel.", vier Objekte als Kacheln mit Zimmerzahl, Wohnfläche, Grundstück und Preis sowie ein QR-Code für alle Exposés.',
+    },
+  },
+  {
     id: 'handwerk',
     variante: 'dunkel',
     branche: 'Handwerksbetrieb, Stellenanzeige',
