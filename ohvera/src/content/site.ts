@@ -262,19 +262,6 @@ export const sicherheiten = [
   },
 ];
 
-/** Der Preis, heruntergebrochen. Reine Division — keine Aussage darüber,
-    was die Werbung bringt oder wie viele Menschen sie sehen. */
-export const kostenrechnung = {
-  titel: 'Was 49 € im Monat bedeuten',
-  zeilen: [
-    { bezeichnung: 'Im Monat', wert: '49 €' },
-    { bezeichnung: 'Am Tag', wert: '1,63 €' },
-    { bezeichnung: 'Je Ausspielung', wert: '0,25 Cent' },
-  ],
-  hinweis:
-    'Das ist geteilt, nicht gemessen: 49 € ÷ 30 Tage ÷ 648 Ausspielungen. Es sagt, was ein Durchlauf kostet — nicht, wer ihn sieht.',
-};
-
 /** Steht direkt unter den Paketkarten. */
 export const paketHinweise = {
   preis:

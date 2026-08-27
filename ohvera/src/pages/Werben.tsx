@@ -16,7 +16,6 @@ import Abschnitt from '../components/Abschnitt';
 import Faq from '../components/Faq';
 import Haken from '../components/Haken';
 import Icon from '../components/Icon';
-import Kostenrechnung from '../components/Kostenrechnung';
 import Motivgalerie from '../components/Motivgalerie';
 import Pakete from '../components/Pakete';
 import Reveal from '../components/Reveal';
@@ -89,23 +88,18 @@ export default function Werben() {
         <div className="mt-10">
           <Pakete />
         </div>
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.3fr] lg:items-start">
-          <Reveal richtung="links">
-            <Kostenrechnung />
-          </Reveal>
-          <Reveal richtung="rechts" className="lg:pt-2">
-            <div className="rounded-lg border border-dashed border-grau/40 p-6">
-              <h3 className="h3">Noch unsicher, welches Paket?</h3>
-              <p className="fliess mt-3 text-grau-stark">
-                Dann schreib uns kurz, was du bewerben willst — wir sagen dir ehrlich, welches
-                Paket passt. Auch wenn das BASIS ist.
-              </p>
-              <Link to="/kampagne-starten" className="btn-primaer mt-6">
-                Unverbindlich anfragen
-              </Link>
-            </div>
-          </Reveal>
-        </div>
+        <Reveal className="mt-12">
+          <div className="rounded-lg border border-dashed border-grau/40 p-6 sm:p-8">
+            <h3 className="h3">Noch unsicher, welches Paket?</h3>
+            <p className="fliess mt-3 text-grau-stark">
+              Dann schreib uns kurz, was du bewerben willst — wir sagen dir ehrlich, welches Paket
+              passt. Auch wenn das BASIS ist.
+            </p>
+            <Link to="/kampagne-starten" className="btn-primaer mt-6">
+              Unverbindlich anfragen
+            </Link>
+          </div>
+        </Reveal>
       </Abschnitt>
 
       {/* Vergleichstabelle */}
