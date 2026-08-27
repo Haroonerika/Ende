@@ -521,7 +521,7 @@ export const startseite = {
      Lebensläufe. Wer namentlich genannt wird, hat dem zugestimmt. */
   person: {
     h2: 'Hinter OHVERA stehen vier Menschen.',
-    text: 'Zwei von uns gestalten, zwei sind im Vertrieb unterwegs. Gegründet hat OHVERA Haroon Mishkoo — er arbeitet als Friseur in Haren und kennt die Betriebe hier persönlich. Wir starten mit einem Bildschirm, nicht mit einem Netzwerk, weil wir es erst beweisen wollen, bevor wir es verkaufen. Wenn etwas nicht läuft, rufst du keine Hotline an. Du rufst deinen Ansprechpartner an.',
+    text: 'Zwei von uns gestalten, zwei sind im Vertrieb unterwegs. Gegründet hat OHVERA Haroon Mishkoo. Wir kommen aus der Region und kennen die Betriebe hier persönlich — viele davon, bevor sie Kunden werden. Wir starten mit einem Bildschirm, nicht mit einem Netzwerk, weil wir es erst beweisen wollen, bevor wir es verkaufen. Wenn etwas nicht läuft, rufst du keine Hotline an. Du rufst deinen Ansprechpartner an.',
     rollen: [
       {
         anzahl: '2',
