@@ -40,7 +40,21 @@ Optional für später:
 **Wichtig, falls das kommt:** Der Empfänger muss so eingerichtet sein, dass
 hochgeladene Fotos **nicht öffentlich abrufbar** sind.
 
-## 3 · Foto von Haroon  (`src/content/site.ts`, Abschnitt 9 „person")
+## 3 · Lagebeschreibung der Standorte  (`src/content/site.ts`, Abschnitt 6)
+
+Die Städte und die Anzahl der Bildschirme stehen drin (Lingen 4, Haren 2,
+Meppen 2, Nordhorn 2). Was fehlt, ist je Stadt ein kurzer Satz zur Lage —
+ohne Firmennamen und ohne Adresse:
+
+- [ ] `[LAGEN IN LINGEN EINTRAGEN]`
+- [ ] `[LAGEN IN HAREN EINTRAGEN]`
+- [ ] `[LAGEN IN MEPPEN EINTRAGEN]`
+- [ ] `[LAGEN IN NORDHORN EINTRAGEN]`
+
+Beispiel: „Zwei in der Fußgängerzone, zwei an einer Ausfallstraße mit
+Berufsverkehr." Das reicht, damit sich jemand die Lage vorstellen kann.
+
+## 4 · Foto von Haroon  (`src/content/site.ts`, Abschnitt 9 „person")
 
 - [ ] `[FOTO HAROON EINFÜGEN]` — echtes Foto in `public/` legen und den Pfad
       in `startseite.person.fotoPfad` eintragen (z. B. `/haroon.jpg`).
@@ -52,14 +66,14 @@ Das Team steht bewusst nur mit Rollen auf der Seite („zwei in der Gestaltung,
 zwei im Vertrieb"). Namen oder Fotos der drei anderen kommen erst dazu, wenn
 sie ausdrücklich zugestimmt haben — dann in `startseite.person.rollen`.
 
-## 4 · Impressum  (`src/content/site.ts`, Abschnitt 17)
+## 5 · Impressum  (`src/content/site.ts`, Abschnitt 17)
 
 Rechtsform ist eingetragen: Einzelunternehmen, kein Registereintrag,
 Kleinunternehmerregelung nach § 19 UStG. Offen bleibt nur:
 
 - [ ] Anschrift (siehe Abschnitt 1 dieser Liste)
 
-## 5 · Datenschutzerklärung  (`src/content/site.ts`, Abschnitt 17)
+## 6 · Datenschutzerklärung  (`src/content/site.ts`, Abschnitt 17)
 
 Nur noch eine Lücke — ein Wort in der Konstante `hostinganbieter`:
 
@@ -72,7 +86,7 @@ Alles Übrige ist eingetragen: Logfiles 7 Tage, WhatsApp-Hinweis, zuständige
 Aufsichtsbehörde, Stand der Erklärung. Die Formulare senden nichts an einen
 Server — das steht so drin und stimmt auch.
 
-## 6 · Rechtsprüfung
+## 7 · Rechtsprüfung
 
 - [ ] **Impressum und Datenschutzerklärung vor der Veröffentlichung
       juristisch prüfen lassen.** Beides ist ein Gerüst, kein geprüfter
@@ -83,7 +97,7 @@ Server — das steht so drin und stimmt auch.
       tagesgenaue Verlängerung bei Ausfall über 24 Stunden,
       Branchenexklusivität pro Bildschirm, Übergang der Motivrechte.
 
-## 7 · Vor dem Livegang
+## 8 · Vor dem Livegang
 
 - [ ] Domain `ohvera.de` verbinden und HTTPS aktivieren.
 - [ ] **SPA-Fallback beim Hoster einrichten** — alle Pfade müssen auf
@@ -95,20 +109,20 @@ Server — das steht so drin und stimmt auch.
 - [ ] `sitemap.xml` und `robots.txt` in `public/` prüfen, falls sich die
       Domain ändert.
 
-## 8 · Sobald es echte Kunden gibt
+## 9 · Sobald es echte Kunden gibt
 
 - [ ] Erst wenn Gründungskunden **schriftlich zugestimmt** haben: Einträge in
       `referenzen` in `src/content/site.ts` ergänzen (Logo, Zitat,
       Betriebsname, Ort). Der Abschnitt „Was Kunden sagen" erscheint dann
       automatisch. Solange das Array leer ist, wird er nicht gerendert.
-- [ ] Sobald der Pilotstandort schriftlich zugesagt ist: Standortangaben in
-      `standorte` präzisieren. Der Standort wird **erst dann** namentlich
-      genannt, wenn die Zusage schriftlich vorliegt.
-- [ ] Sobald der Bildschirm läuft: Status der Standortkarte von
-      `In Vorbereitung` auf den tatsächlichen Stand ändern und die freien
-      Plätze aktualisieren.
-- [ ] `NETWORK`-Paket auf `buchbar: true` setzen und einen Preis eintragen,
-      sobald es mehr als einen Standort gibt.
+- [ ] Neue Bildschirme einfach in `standorte` ergänzen oder die Anzahl je
+      Stadt erhöhen. Alle Zahlen auf der Seite (10 Bildschirme, 4 Städte,
+      80 Plätze, Ausspielungen im Netz) werden daraus **gerechnet** und
+      stimmen dann automatisch.
+- [ ] `NETWORK`: Sobald die Kalkulation steht, in `pakete` einen festen
+      Preis eintragen — dann verschwindet „Preis auf Anfrage" von selbst.
+- [ ] Namen der Partnerbetriebe erscheinen erst, wenn sie schriftlich
+      zugestimmt haben. Bis dahin bleibt es bei Stadt und Lage.
 
 ---
 

@@ -1,13 +1,20 @@
 import { useState } from 'react';
-import { faq } from '../content/site';
+import { faq as alleFragen } from '../content/site';
 
-/** FAQ als Akkordeon. Vollständig über die Tastatur bedienbar. */
-export default function Faq() {
+type Eintrag = { frage: string; antwort: string };
+
+/**
+ * FAQ als Akkordeon. Vollständig über die Tastatur bedienbar.
+ * Ohne Angabe werden alle Fragen gezeigt — die Startseite übergibt
+ * nur die wichtigsten.
+ */
+export default function Faq({ eintraege }: { eintraege?: Eintrag[] }) {
   const [offen, setOffen] = useState<number | null>(0);
+  const liste = eintraege ?? alleFragen;
 
   return (
     <div className="mx-auto max-w-3xl divide-y trennlinie border-y">
-      {faq.map((eintrag, i) => {
+      {liste.map((eintrag, i) => {
         const istOffen = offen === i;
         return (
           <div key={eintrag.frage}>

@@ -31,7 +31,7 @@ export const marke = {
   inhaber: 'Haroon Mishkoo',
   /** Ein Satz, der überall als Kurzbeschreibung dient (Footer, SEO, Schema.org) */
   kurzbeschreibung:
-    'OHVERA bringt lokale Unternehmen auf digitale Werbedisplays in Schaufenstern. Gestaltung inklusive, Ausspielung nachgewiesen.',
+    'OHVERA bringt lokale Unternehmen auf digitale Werbedisplays in Schaufenstern — zehn Standorte im Emsland und in der Grafschaft Bentheim. Gestaltung inklusive, Ausspielung nachgewiesen.',
 } as const;
 
 /* ------------------------------------------------------------------
@@ -221,16 +221,18 @@ export const pakete: Paket[] = [
     id: 'network',
     name: 'NETWORK',
     preis: null,
-    preisZusatz: '',
+    preisZusatz: 'Preis auf Anfrage',
     einzeiler: 'Ein Motiv auf mehreren Bildschirmen gleichzeitig.',
-    fuerWen: 'Für später, wenn es mehr als einen Standort gibt.',
+    fuerWen: 'Für dich, wenn du in mehreren Städten gesehen werden willst.',
     merkmale: [
-      { text: 'Ausspielung an mehreren Standorten' },
-      { text: 'Ein gemeinsamer Ausspielnachweis' },
+      { text: 'Ausspielung an mehreren Standorten deiner Wahl', hervorgehoben: true },
+      { text: 'Motive von uns gestaltet, wie in den anderen Paketen' },
+      { text: 'Ein gemeinsamer Ausspielnachweis für alle Bildschirme' },
+      { text: 'Preis richtet sich nach Anzahl der Bildschirme' },
     ],
-    laufzeit: '',
-    buchbar: false,
-    hinweis: 'Ab mehreren Standorten verfügbar — in Vorbereitung',
+    laufzeit: 'Monatlich kündbar, keine Mindestlaufzeit',
+    buchbar: true,
+    hinweis: 'Wir rechnen dir zusammen, was dein Wunschgebiet kostet.',
   },
 ];
 
@@ -239,18 +241,22 @@ export const pakete: Paket[] = [
     wo der Kunde über den Preis nachdenkt. */
 export const sicherheiten = [
   {
+    icon: 'kalender',
     titel: 'Keine Mindestlaufzeit',
     text: 'Monatlich kündbar. Bringt es dir nichts, hörst du zum Monatsende auf.',
   },
   {
+    icon: 'stift',
     titel: 'Kein Werbematerial nötig',
     text: 'Logo, ein Foto, ein Satz — den Rest gestalten wir. In jedem Paket enthalten.',
   },
   {
+    icon: 'haken',
     titel: 'Die Motive gehören dir',
     text: 'Auch nach der Kampagne. Instagram, Schaufenster, gedruckt — wie du willst.',
   },
   {
+    icon: 'uhr',
     titel: 'Ausfall wird ausgeglichen',
     text: 'Steht der Bildschirm länger als 24 Stunden, verlängert sich deine Laufzeit tagesgenau.',
   },
@@ -274,7 +280,7 @@ export const paketHinweise = {
   preis:
     'Alle Preise pro Monat. Kein Ausweis von Umsatzsteuer gemäß § 19 UStG (Kleinunternehmerregelung).',
   pilotpreis:
-    'Pilotpreis — für die ersten Kunden 12 Monate garantiert, auch wenn weitere Standorte dazukommen.',
+    'Einführungspreis — für die ersten Kunden 12 Monate garantiert, auch wenn weitere Standorte dazukommen.',
   exklusivitaet:
     'Branchenexklusivität gilt jeweils für den gebuchten Bildschirm, nicht für das gesamte Netz.',
 };
@@ -282,10 +288,12 @@ export const paketHinweise = {
 /** Zusagen, die unabhängig vom Paket gelten. */
 export const zusagen = [
   {
+    icon: 'haken',
     titel: 'Die Motive gehören dir',
     text: 'Alle Motive gehen in dein Eigentum über und dürfen frei weiterverwendet werden — auch nach Ende der Kampagne.',
   },
   {
+    icon: 'uhr',
     titel: 'Ausfall wird ausgeglichen',
     text: 'Bei einem Ausfall über 24 Stunden verlängert sich deine Laufzeit tagesgenau. Ohne Antrag, ohne Diskussion.',
   },
@@ -301,41 +309,65 @@ export const zusagen = [
 
 /* ------------------------------------------------------------------
    6 · Standorte
-   Hier steht ausschließlich, was es wirklich gibt. Der Pilotstandort
-   wird NICHT namentlich genannt — er ist bisher nur mündlich zugesagt.
+   Zehn Bildschirme in vier Städten, alle in Betrieb.
+   Betriebsnamen stehen hier NICHT — die Partnerbetriebe haben dem
+   nicht zugestimmt. Die Lagebeschreibung je Stadt trägt Haroon ein.
 ------------------------------------------------------------------- */
 
 export type Standort = {
   id: string;
-  titel: string;
-  ort: string;
-  status: 'in-vorbereitung' | 'live';
+  stadt: string;
+  /** Wie viele Bildschirme in dieser Stadt hängen */
+  bildschirme: number;
+  /** Kurze Beschreibung der Lagen — ohne Firmennamen, ohne Adressen */
+  lage: string;
+  status: 'live' | 'in-vorbereitung';
   statusText: string;
-  zeilen: { bezeichnung: string; wert: string }[];
-  cta?: { text: string; ziel: string };
 };
 
 export const standorte: Standort[] = [
   {
-    id: 'haren-innenstadt',
-    titel: 'Haren (Ems) — Schaufenster, Innenstadt',
-    ort: 'Haren (Ems)',
-    status: 'in-vorbereitung',
-    statusText: 'In Vorbereitung',
-    zeilen: [
-      { bezeichnung: 'Format', wert: `Hochformat ${produkt.formatBreite} × ${produkt.formatHoehe}` },
-      { bezeichnung: 'Betriebszeit', wert: `${produkt.betriebVon}–${produkt.betriebBis} Uhr` },
-      {
-        bezeichnung: 'Belegung',
-        wert: `${produkt.slotsVerkaeuflich} von ${produkt.slotsVerkaeuflich} Plätzen frei`,
-      },
-    ],
-    cta: { text: 'Platz sichern', ziel: '/kampagne-starten' },
+    id: 'lingen',
+    stadt: 'Lingen (Ems)',
+    bildschirme: 4,
+    lage: '[LAGEN IN LINGEN EINTRAGEN — z. B. Innenstadt und Fußgängerzone]',
+    status: 'live',
+    statusText: 'In Betrieb',
+  },
+  {
+    id: 'haren',
+    stadt: 'Haren (Ems)',
+    bildschirme: 2,
+    lage: '[LAGEN IN HAREN EINTRAGEN]',
+    status: 'live',
+    statusText: 'In Betrieb',
+  },
+  {
+    id: 'meppen',
+    stadt: 'Meppen',
+    bildschirme: 2,
+    lage: '[LAGEN IN MEPPEN EINTRAGEN]',
+    status: 'live',
+    statusText: 'In Betrieb',
+  },
+  {
+    id: 'nordhorn',
+    stadt: 'Nordhorn',
+    bildschirme: 2,
+    lage: '[LAGEN IN NORDHORN EINTRAGEN]',
+    status: 'live',
+    statusText: 'In Betrieb',
   },
 ];
 
+/** Aus den Standorten gerechnet — nie von Hand eintragen. */
+export const bildschirmeGesamt = standorte.reduce((summe, ort) => summe + ort.bildschirme, 0);
+export const staedteGesamt = standorte.length;
+export const plaetzeGesamt = bildschirmeGesamt * produkt.slotsVerkaeuflich;
+export const ausspielungenNetzProTag = ausspielungenProTag * bildschirmeGesamt;
+
 export const standortHinweis =
-  'Weitere Standorte in Haren, Meppen und Lingen sind geplant. Hier steht nur, was es wirklich gibt.';
+  'Jeder Bildschirm hängt in einem Schaufenster mit Blick auf die Straße. Die Betriebe dahinter nennen wir nicht — dafür haben wir keine Freigabe.';
 
 /* ------------------------------------------------------------------
    7 · Referenzen
@@ -383,7 +415,7 @@ export const startseite = {
   hero: {
     h1: 'Werbung, die vor Ort gesehen wird.',
     unterzeile:
-      'OHVERA bringt lokale Unternehmen auf digitale Werbedisplays in Schaufenstern — dort, wo ihre Kunden jeden Tag vorbeigehen. Erster Standort in Haren (Ems), in Vorbereitung.',
+      'Zehn digitale Werbedisplays in Schaufenstern in Haren, Meppen, Lingen und Nordhorn. Dein Motiv läuft dort, wo deine Kunden jeden Tag vorbeigehen — gestaltet von uns, ab 49 € im Monat.',
     ctaPrimaer: { text: 'Werbung schalten', ziel: '/kampagne-starten' },
     ctaSekundaer: { text: "So funktioniert's", ziel: '/so-funktionierts' },
     /* Bewusst rein qualitativ — keine Zahlen, keine Reichweite. */
@@ -403,16 +435,39 @@ export const startseite = {
   /* 9.1b Auf einen Blick — beantwortet „Was kaufe ich eigentlich?"
      in fünf Zahlen, direkt unter dem Hero. */
   aufEinenBlick: {
-    titel: 'Was du buchst, in Zahlen',
+    titel: 'Das gibt es wirklich',
     hinweis:
-      'Das sind Angaben zur Technik und zur Schleife — keine Reichweite. Wie viele Menschen vorbeigehen, messen wir nicht.',
+      'Angaben zu Technik und Schleife — keine Reichweite. Wie viele Menschen vorbeigehen, messen wir nicht.',
     zahlen: [
-      { wert: 10, einheit: 'Sekunden', bezeichnung: 'läuft dein Spot je Durchlauf' },
-      { wert: ausspielungenProTag, einheit: 'Mal am Tag', bezeichnung: 'wird er ausgespielt' },
+      { wert: 10, einheit: 'Bildschirme', bezeichnung: 'hängen und laufen' },
+      { wert: 4, einheit: 'Städte', bezeichnung: 'Haren, Meppen, Lingen, Nordhorn' },
+      { wert: ausspielungenProTag, einheit: 'Mal am Tag', bezeichnung: 'läuft dein Spot je Bildschirm' },
       { wert: 18, einheit: 'Stunden', bezeichnung: 'Betrieb, 07:00 bis 01:00 Uhr' },
-      { wert: 8, einheit: 'von 10 Plätzen', bezeichnung: 'sind überhaupt verkäuflich' },
-      { wert: 1, einheit: 'Ansprechpartner', bezeichnung: 'den du persönlich erreichst' },
     ],
+  },
+
+  /* 9.1c In drei Schritten — der Kern der Startseite.
+     Wer nur diesen Abschnitt liest, hat das Angebot verstanden. */
+  dreiSchritte: {
+    h2: 'In drei Schritten im Schaufenster.',
+    schritte: [
+      {
+        icon: 'nachricht',
+        titel: 'Du schickst dein Angebot',
+        text: 'Logo, ein Foto, ein Satz. Per WhatsApp reicht.',
+      },
+      {
+        icon: 'stift',
+        titel: 'Wir gestalten dein Motiv',
+        text: 'In wenigen Tagen fertig, eine Korrekturrunde inklusive.',
+      },
+      {
+        icon: 'schleife',
+        titel: `Es läuft ${ausspielungenProTag} Mal am Tag`,
+        text: 'Zehn Sekunden, 18 Stunden lang, in der Stadt deiner Wahl.',
+      },
+    ],
+    hinweis: 'Mehr musst du nicht tun. Alles Weitere übernehmen wir.',
   },
 
   /* 9.2 Problem -------------------------------------------------- */
@@ -472,7 +527,7 @@ export const startseite = {
   /* 9.4b So sieht es aus ----------------------------------------- */
   schaufenster: {
     h2: 'So sieht deine Werbung im Schaufenster aus.',
-    bildunterschrift: 'Visualisierung. Der erste Standort ist in Vorbereitung.',
+    bildunterschrift: 'Zeichnung, kein Foto — so hängt der Bildschirm im Schaufenster.',
     motiveTitel: 'Die Motive einzeln',
     motiveText:
       'Vier Beispiele im Format Hochformat — so groß, dass man sie aus einigen Metern Entfernung noch lesen kann.',
@@ -488,6 +543,8 @@ export const startseite = {
   /* 9.6 Standorte ------------------------------------------------ */
   standorteAbschnitt: {
     h2: 'Wo deine Werbung läuft.',
+    unterzeile:
+      'Zehn Bildschirme, vier Städte. Du entscheidest, in welcher davon du gesehen wirst.',
   },
 
   /* 9.7 Warum OHVERA --------------------------------------------- */
@@ -496,7 +553,7 @@ export const startseite = {
     ja: {
       titel: 'Das bekommst du:',
       punkte: [
-        'Einen echten, benannten Standort',
+        'Zehn Bildschirme, die es wirklich gibt — nachprüfbar in vier Städten',
         'Eine feste Ausspielfrequenz, die du nachrechnen kannst',
         'Gestaltung durch unsere Designer, in jedem Paket',
         'Ein Ausspielprotokoll am Monatsende',
@@ -521,7 +578,7 @@ export const startseite = {
      Lebensläufe. Wer namentlich genannt wird, hat dem zugestimmt. */
   person: {
     h2: 'Hinter OHVERA stehen vier Menschen.',
-    text: 'Zwei von uns gestalten, zwei sind im Vertrieb unterwegs. Gegründet hat OHVERA Haroon Mishkoo. Wir kommen aus der Region und kennen die Betriebe hier persönlich — viele davon, bevor sie Kunden werden. Wir starten mit einem Bildschirm, nicht mit einem Netzwerk, weil wir es erst beweisen wollen, bevor wir es verkaufen. Wenn etwas nicht läuft, rufst du keine Hotline an. Du rufst deinen Ansprechpartner an.',
+    text: 'Zwei von uns gestalten, zwei sind im Vertrieb unterwegs. Gegründet hat OHVERA Haroon Mishkoo. Wir kommen aus der Region und kennen die Betriebe hier persönlich — viele davon, bevor sie Kunden werden. Wenn etwas nicht läuft, rufst du keine Hotline an. Du rufst deinen Ansprechpartner an.',
     rollen: [
       {
         anzahl: '2',
@@ -654,23 +711,33 @@ export const beispielmotive: Beispielmotiv[] = [
    Daten (FAQPage) in der Suchmaschine.
 ------------------------------------------------------------------- */
 
-export const faq: { frage: string; antwort: string }[] = [
+export const faq: { frage: string; antwort: string; wichtig?: boolean }[] = [
   {
     frage: 'Wie viele Menschen sehen meine Werbung?',
-    antwort: `Das können wir dir nicht sagen, weil wir es nicht messen — und wer dir eine Zahl nennt, hat sie meistens auch nicht gemessen. Was feststeht: Dein Spot läuft ${ausspielungenProTag} Mal am Tag, ${produkt.betriebStunden} Stunden lang, an einem Schaufenster in der Innenstadt. Wie viel dort los ist, kannst du als Ortskundiger besser einschätzen als jede Statistik.`,
+    wichtig: true,
+    antwort: `Das können wir dir nicht sagen, weil wir es nicht messen — und wer dir eine Zahl nennt, hat sie meistens auch nicht gemessen. Was feststeht: Dein Spot läuft ${ausspielungenProTag} Mal am Tag, ${produkt.betriebStunden} Stunden lang, in einem Schaufenster mit Blick auf die Straße. Wie viel dort los ist, kannst du als Ortskundiger besser einschätzen als jede Statistik.`,
   },
   {
     frage: 'Was kostet eine Kampagne?',
+    wichtig: true,
     antwort:
       'Ab 49 € im Monat inklusive Gestaltung. Drei Pakete, alle Preise stehen auf dieser Seite.',
   },
   {
+    frage: 'Kann ich mir aussuchen, auf welchem Bildschirm ich laufe?',
+    wichtig: true,
+    antwort:
+      'Ja. Du sagst uns, in welcher Stadt du gesehen werden willst, und wir sagen dir, welche Plätze dort frei sind. Wer in mehreren Städten laufen will, nimmt NETWORK.',
+  },
+  {
     frage: 'Wie lange bin ich gebunden?',
+    wichtig: true,
     antwort:
       'Nicht länger als einen Monat. Alle drei Pakete laufen monatlich und sind zum Monatsende kündbar — keine Mindestlaufzeit, keine Jahresbindung. Auch bei PLUS und PRO nicht, obwohl wir dafür mehrere Motive gestalten.',
   },
   {
     frage: 'Ich habe kein Werbematerial. Geht das trotzdem?',
+    wichtig: true,
     antwort:
       'Ja, das ist der Normalfall. Gestaltung ist in jedem Paket enthalten. Wir brauchen dein Logo, ein bis zwei gute Fotos und einen Satz, was beworben werden soll.',
   },
@@ -713,7 +780,7 @@ export const faq: { frage: string; antwort: string }[] = [
 export const seiteWerben = {
   eyebrow: 'Für Werbekunden',
   h1: 'Ein Platz in der Schleife. Gestaltung inklusive.',
-  einleitung: `Zehn Plätze hat die Schleife, ${produkt.slotsVerkaeuflich} davon sind buchbar. Jeder Kunde belegt genau einen. Was du buchst, ist kein Werbeplatz irgendwo, sondern ein fester Platz auf einem konkreten Bildschirm — mit einer Frequenz, die du nachrechnen kannst.`,
+  einleitung: `Zehn Plätze hat die Schleife jedes Bildschirms, ${produkt.slotsVerkaeuflich} davon sind buchbar. Jeder Kunde belegt genau einen. Was du buchst, ist kein Werbeplatz irgendwo, sondern ein fester Platz auf einem konkreten Bildschirm — mit einer Frequenz, die du nachrechnen kannst.`,
   ablaufTitel: 'Von der Anfrage bis zum ersten Spot',
   vergleichTitel: 'Die Pakete im Vergleich',
   vergleichZeilen: [
@@ -730,21 +797,21 @@ export const seiteWerben = {
 
 export const seiteStandorte = {
   eyebrow: 'Standorte',
-  h1: 'Ein Bildschirm. Ehrlich aufgeführt.',
+  h1: 'Zehn Bildschirme. Vier Städte.',
   einleitung:
-    'OHVERA startet mit einem Standort. Solange das so ist, gibt es hier keine Karte, keine Marker und keine Filter — das wäre Fassade.',
-  geplantTitel: 'Was geplant ist',
+    'Alle Bildschirme hängen in Schaufenstern mit Blick auf die Straße und laufen täglich von 07:00 bis 01:00 Uhr. Hier steht, wo sie stehen — und was wir bewusst nicht schreiben.',
+  geplantTitel: 'Was wir hier nicht zeigen',
   geplantText:
-    'Nach dem ersten Bildschirm folgen schrittweise weitere Standorte in Haren, Meppen und Lingen. Sobald einer davon feststeht, steht er hier — vorher nicht.',
+    'Keine Karte mit Nadeln, keine Fotos der Partnerbetriebe, keine Namen. Die Betriebe stellen uns ihr Schaufenster zur Verfügung, nicht ihren Ruf. Wenn du wissen willst, wie ein Standort aussieht, fahr hin oder ruf uns an — wir sagen dir, wo du hinschauen musst.',
   partnerHinweis:
-    'Du hast selbst ein Schaufenster in einer dieser Städte? Dann ist der nächste Standort vielleicht deiner.',
+    'Du hast selbst ein Schaufenster in einer dieser Städte? Dann wird der nächste Bildschirm vielleicht deiner.',
 };
 
 export const seiteStandortpartner = {
   eyebrow: 'Für Standortpartner',
   h1: 'Du hast ein Schaufenster. Wir haben den Bildschirm.',
   einleitung:
-    'Wir installieren und betreiben den Bildschirm auf eigene Kosten und kümmern uns um Technik, Inhalte und Vermarktung. Du stellst die Fläche und den Strom.',
+    'Wir installieren und betreiben den Bildschirm auf eigene Kosten und kümmern uns um Technik, Inhalte und Vermarktung. Du stellst die Fläche und den Strom. Zehn Betriebe machen das bereits mit uns.',
   gegenleistungTitel: 'Was du bekommst',
   gegenleistung: [
     {
@@ -940,9 +1007,9 @@ export const uploadRegeln = {
 
 export const footer = {
   beschreibung:
-    'OHVERA baut ein Netz digitaler Werbebildschirme in Schaufenstern lokaler Betriebe auf. Erster Standort in Haren (Ems), in Vorbereitung.',
+    'OHVERA betreibt digitale Werbebildschirme in Schaufenstern lokaler Betriebe — zehn Standorte in Haren, Meppen, Lingen und Nordhorn.',
   hinweis:
-    'OHVERA ist im Aufbau. Auf dieser Website steht kein Kunde, keine Bewertung und keine Reichweitenzahl — weil es sie noch nicht gibt.',
+    'Auf dieser Website steht kein Kundenlogo, keine Bewertung und keine Reichweitenzahl. Nicht aus Bescheidenheit, sondern weil wir nur behaupten, was wir belegen können.',
 };
 
 /* ------------------------------------------------------------------
@@ -956,7 +1023,7 @@ export const seo: Record<
   start: {
     titel: 'OHVERA — Werbung, die vor Ort gesehen wird',
     beschreibung:
-      'Digitale Werbedisplays in Schaufenstern lokaler Betriebe. Gestaltung inklusive, feste Ausspielfrequenz, Nachweis am Monatsende. Erster Standort in Haren (Ems), in Vorbereitung.',
+      'Zehn digitale Werbedisplays in Schaufenstern in Haren, Meppen, Lingen und Nordhorn. Gestaltung inklusive, ab 49 € im Monat, monatlich kündbar.',
     pfad: '/',
   },
   werben: {
@@ -965,9 +1032,9 @@ export const seo: Record<
     pfad: '/werben',
   },
   standorte: {
-    titel: 'Standorte | OHVERA',
+    titel: 'Standorte — 10 Bildschirme in 4 Städten | OHVERA',
     beschreibung:
-      'Der erste OHVERA-Bildschirm entsteht in Haren (Ems). Weitere Standorte in Haren, Meppen und Lingen sind geplant.',
+      'OHVERA-Bildschirme hängen in Lingen (4), Haren (2), Meppen (2) und Nordhorn (2) — täglich von 07:00 bis 01:00 Uhr in Betrieb.',
     pfad: '/standorte',
   },
   standortpartner: {
