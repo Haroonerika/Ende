@@ -20,6 +20,6 @@ Einfach `index.html` im Browser öffnen.
 ---
 
 ## Weitere Projekte in diesem Repo
-- ⚽ **[Kick-Off Roulette](fifa/)** – Team-Auslosung für FIFA-Abende
+- ⚽ **[Hogos Kick-Off Roulette](fifa/)** – Team-Auslosung für FIFA-Abende
   ([live](https://haroonerika.github.io/ende/fifa/))
 - 🏢 **[OHVERA](ohvera/)** – Unternehmensseite (React + TypeScript + Vite)

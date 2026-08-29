@@ -1,4 +1,4 @@
-# Kick-Off Roulette ⚽
+# Hogos Kick-Off Roulette ⚽
 
 Team-Auslosung für FIFA-Abende mit den Kollegen. Modus wählen, Knopf drücken,
 jeder bekommt seine Mannschaft – fertig.
@@ -36,6 +36,10 @@ Liga Argentina · Liga MX · MLS · 2. Bundesliga · EFL Championship
 
 ## Lokal starten
 `fifa/index.html` einfach im Browser öffnen – keine Installation, kein Build.
+
+## Einzeldatei zum Veröffentlichen
+`node fifa/build-artifact.mjs meine-seite.html` packt HTML, CSS, JS und die
+Team-Datenbank in eine einzige Datei – praktisch zum Hochladen oder Teilen.
 
 ## Teams ergänzen
 Alles steckt in `teams.js`. Eine Zeile pro Team:

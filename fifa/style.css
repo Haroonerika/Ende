@@ -2,6 +2,7 @@
    Kick-Off Roulette – Styles
    ============================================================ */
 :root{
+  color-scheme:dark;          /* bewusst durchgehend dunkel: Flutlicht-Optik */
   --bg:#05100c;
   --bg-2:#08170f;
   --card:rgba(255,255,255,.045);
