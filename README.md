@@ -16,3 +16,10 @@ aber deutlich frischer, flüssiger und schöner.
 
 ## Lokal starten
 Einfach `index.html` im Browser öffnen.
+
+---
+
+## Weitere Projekte in diesem Repo
+- ⚽ **[Hogos Kick-Off Roulette](fifa/)** – Team-Auslosung für FIFA-Abende
+  ([live](https://haroonerika.github.io/ende/fifa/))
+- 🏢 **[OHVERA](ohvera/)** – Unternehmensseite (React + TypeScript + Vite)

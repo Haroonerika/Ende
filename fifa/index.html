@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#05100c" />
+  <meta name="description" content="Kick-Off Roulette – zieht für dich und deine Kollegen zufällige FIFA-Teams: Länderspiele oder Vereine, fair ausgelost, mit Wappen und Sternen." />
+  <title>Hogos Kick-Off Roulette</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>" />
+</head>
+<body>
+  <div class="pitch" aria-hidden="true">
+    <span class="glow glow-1"></span>
+    <span class="glow glow-2"></span>
+    <span class="lines"></span>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-ball">⚽</span>
+      <span class="brand-name">Hogos Kick-Off <span>Roulette</span></span>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="soundBtn" type="button" aria-pressed="true" title="Sound an/aus"><span id="soundIcon">🔊</span></button>
+      <a class="icon-btn" href="../" title="Zurück zur Startseite">↩</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ SCHRITT 1: MODUS ============ -->
+    <section class="step" id="step-mode">
+      <div class="step-head">
+        <span class="step-no">1</span>
+        <div>
+          <h1>Was zockt ihr heute?</h1>
+          <p class="sub">Erst den Modus wählen – danach lost jeder Spieler sein Team aus.</p>
+        </div>
+      </div>
+
+      <div class="mode-grid">
+        <button class="mode-card" data-mode="nation" type="button">
+          <span class="mode-emoji">🌍</span>
+          <span class="mode-title">Länderspiele</span>
+          <span class="mode-desc">Alle Nationalmannschaften – von Brasilien bis Island.</span>
+          <span class="mode-count" id="countNations">–</span>
+        </button>
+        <button class="mode-card" data-mode="club" type="button">
+          <span class="mode-emoji">🏆</span>
+          <span class="mode-title">Vereine &amp; Champions League</span>
+          <span class="mode-desc">Alle Klubs aus den großen Ligen – Bundesliga, Premier League, LaLiga &amp; mehr.</span>
+          <span class="mode-count" id="countClubs">–</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ SCHRITT 2: FILTER ============ -->
+    <section class="step is-hidden" id="step-filter">
+      <div class="step-head">
+        <span class="step-no">2</span>
+        <div>
+          <h2 id="filterTitle">Welche Teams sollen in den Topf?</h2>
+          <p class="sub" id="filterSub">Standard: alle. Klick eine Liga weg, wenn ihr sie nicht wollt.</p>
+        </div>
+        <button class="ghost-btn step-back" type="button" data-back="mode">Modus ändern</button>
+      </div>
+
+      <div class="chip-bar" id="groupChips"></div>
+
+      <div class="filter-row">
+        <div class="filter-box">
+          <label for="minStars">Mindest-Stärke</label>
+          <div class="range-wrap">
+            <input type="range" id="minStars" min="3" max="5" step="0.5" value="3" />
+            <output id="minStarsOut">3 ★</output>
+          </div>
+        </div>
+        <div class="filter-box">
+          <label for="maxStars">Maximale Stärke</label>
+          <div class="range-wrap">
+            <input type="range" id="maxStars" min="3" max="5" step="0.5" value="5" />
+            <output id="maxStarsOut">5 ★</output>
+          </div>
+        </div>
+        <div class="filter-box toggle-box">
+          <label class="switch">
+            <input type="checkbox" id="balanceToggle" checked />
+            <span class="slider"></span>
+            <span class="switch-label">Faire Auslosung<small>Beide Teams max. ein halber Stern auseinander</small></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="pool-line">
+        <span id="poolInfo">–</span>
+        <button class="ghost-btn" id="selectAllBtn" type="button">Alle auswählen</button>
+        <button class="ghost-btn" id="clearAllBtn" type="button">Alle abwählen</button>
+      </div>
+
+      <button class="primary-btn big" id="toDuelBtn" type="button">Weiter zur Auslosung →</button>
+    </section>
+
+    <!-- ============ SCHRITT 3: DUELL ============ -->
+    <section class="step is-hidden" id="step-duel">
+      <div class="step-head">
+        <span class="step-no">3</span>
+        <div>
+          <h2>Auslosung</h2>
+          <p class="sub" id="duelSub">Jeder drückt seinen Knopf – fertig.</p>
+        </div>
+        <button class="ghost-btn step-back" type="button" data-back="filter">Auswahl ändern</button>
+      </div>
+
+      <div class="duel">
+        <article class="player-card" id="card-0">
+          <input class="player-name" id="name-0" value="Spieler 1" maxlength="16" aria-label="Name Spieler 1" />
+          <div class="slot" id="slot-0">
+            <div class="slot-empty">
+              <span class="qmark">?</span>
+              <p>Noch kein Team</p>
+            </div>
+          </div>
+          <button class="primary-btn draw-btn" data-player="0" type="button">Team ziehen</button>
+        </article>
+
+        <div class="vs">
+          <span>VS</span>
+          <button class="ghost-btn tiny" id="swapBtn" type="button" title="Teams tauschen">⇄ Tauschen</button>
+        </div>
+
+        <article class="player-card" id="card-1">
+          <input class="player-name" id="name-1" value="Spieler 2" maxlength="16" aria-label="Name Spieler 2" />
+          <div class="slot" id="slot-1">
+            <div class="slot-empty">
+              <span class="qmark">?</span>
+              <p>Noch kein Team</p>
+            </div>
+          </div>
+          <button class="primary-btn draw-btn" data-player="1" type="button">Team ziehen</button>
+        </article>
+      </div>
+
+      <div class="duel-actions">
+        <button class="primary-btn ghost-primary" id="drawBothBtn" type="button">🎲 Beide neu auslosen</button>
+        <button class="ghost-btn" id="resetBtn" type="button">Zurücksetzen</button>
+      </div>
+
+      <div class="history-wrap" id="historyWrap" hidden>
+        <h3>Letzte Duelle</h3>
+        <ul class="history" id="history"></ul>
+        <button class="ghost-btn tiny" id="clearHistoryBtn" type="button">Verlauf löschen</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Wappen &amp; Farben sind eigene, vereinfachte Grafiken – keine offiziellen Logos. Läuft komplett offline im Browser.</p>
+  </footer>
+
+  <script src="teams.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
